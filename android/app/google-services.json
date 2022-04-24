@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "758168219246",
+    "project_id": "relevent-auth",
+    "storage_bucket": "relevent-auth.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:758168219246:android:516682b50803e0c716407f",
+        "android_client_info": {
+          "package_name": "com.example.relevent"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "758168219246-vsd4mrg9g7i9h6fkp64lkm6fs1btol1a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPYO8IjCdOCUOSyMRa1MdcZjj_cwl-7sk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "758168219246-vsd4mrg9g7i9h6fkp64lkm6fs1btol1a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
