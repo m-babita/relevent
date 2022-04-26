@@ -3,9 +3,6 @@ import 'package:flutter/material.dart';
 class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
   final String hintText, labelText;
-  
-  
-  
 
   const CustomTextField({
     Key? key,
@@ -27,20 +24,28 @@ class CustomTextField extends StatelessWidget {
           ],
         ),
         child: TextFormField(
-          
-          obscureText: labelText =='Password'? true : false,
+          obscureText: labelText == 'Password' ? true : false,
           controller: controller,
           decoration: InputDecoration(
-            
+            prefixIcon: labelText == 'Password'
+                ? Icon(Icons.lock)
+                : labelText == 'Email'
+                    ? Icon(Icons.mail)
+                    : labelText == 'Name'
+                        ? Icon(Icons.person)
+                        : null,
+            suffixIcon:
+                labelText == 'Password' ? Icon(Icons.remove_red_eye) : null,
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
-              borderSide: const BorderSide(color: Colors.transparent, width: 1.0),
+              borderSide:
+                  const BorderSide(color: Colors.transparent, width: 1.0),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
-              borderSide: const BorderSide(color: Colors.transparent, width: 1.0),
+              borderSide:
+                  const BorderSide(color: Colors.transparent, width: 1.0),
             ),
-            
             contentPadding:
                 const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
             filled: true,

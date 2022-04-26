@@ -16,7 +16,6 @@ class _MyHomePageState extends State<MyHomePage> {
   bool isloggedin = false;
 
   checkAuthentification() async {
-    
     _auth.authStateChanges().listen((user) {
       if (user == null) {
         Navigator.pushReplacementNamed(context, Onboard.routeName);
@@ -59,44 +58,76 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Rel'Event"),
+        title: Row(
+          children: [
+            SizedBox(
+                height: 50, width: 50, child: Image.asset("images/logo.png")),
+            Text("Rel'Event"),
+          ],
+        ),
       ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Container(
-              child: !isloggedin
-                  ? CircularProgressIndicator()
-                  : Column(
+      body: Container(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        child: SingleChildScrollView(
+          child: Container(
+            child: !isloggedin
+                ? CircularProgressIndicator()
+                : Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 25, vertical: 10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        SizedBox(
+                          height: 20,
+                        ),
                         Text(
-                          "Hello, ${user!.displayName}",
+                          "Hello,",
                           style: TextStyle(
-                              fontSize: 24, fontWeight: FontWeight.bold),
+                              color: Colors.teal,
+                              fontSize: 30,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          "${user!.displayName}",
+                          style: TextStyle(
+                              color: Colors.teal,
+                              fontSize: 30,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(
+                          height: 10,
                         ),
                         ElevatedButton(
                           onPressed: signout,
-                          child: Text('Log out'),
-                          style: ButtonStyle(
-                            minimumSize: MaterialStateProperty.all(
-                              Size(MediaQuery.of(context).size.width / 3, 50),
-                            ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text('Logout'),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Icon(
+                                Icons.logout,
+                              ),
+                            ],
                           ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        const Text(
+                          'You have pushed the button this many times:',
+                        ),
+                        Text(
+                          '$_counter',
+                          style: Theme.of(context).textTheme.headline4,
                         ),
                       ],
                     ),
-            ),
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
+                  ),
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(

@@ -1,12 +1,9 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
-import 'package:relevent/pages/home_page.dart';
 import 'package:relevent/services/firebase_auth_methods.dart';
 import 'package:relevent/pages/signup_page.dart';
 import 'package:flutter/material.dart';
 import 'package:relevent/widgets/custom_textfield.dart';
 import 'package:provider/provider.dart';
-
 
 class Login extends StatefulWidget {
   static String routeName = '/login';
@@ -21,7 +18,6 @@ class _LoginState extends State<Login> {
   final TextEditingController passwordController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  
   void loginUser() {
     context.read<FirebaseAuthMethods>().loginWithEmail(
           email: emailController.text,
@@ -29,7 +25,6 @@ class _LoginState extends State<Login> {
           context: context,
         );
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -63,17 +58,16 @@ class _LoginState extends State<Login> {
                 child: Column(
                   children: [
                     CustomTextField(
-                        controller: emailController,
-                        hintText: 'Enter your email',
-                        labelText: 'Email',
-                      ),
+                      controller: emailController,
+                      hintText: 'Enter your email',
+                      labelText: 'Email',
+                    ),
                     SizedBox(height: 20),
                     CustomTextField(
-                        controller: passwordController,
-                        hintText: 'Enter your password',
-                        labelText: 'Password',
-                      ),
-                    
+                      controller: passwordController,
+                      hintText: 'Enter your password',
+                      labelText: 'Password',
+                    ),
                     const SizedBox(height: 20),
                     Row(
                       children: [
@@ -111,8 +105,8 @@ class _LoginState extends State<Login> {
                         text: "Sign Up",
                         style: TextStyle(color: Colors.teal),
                         recognizer: TapGestureRecognizer()
-                          ..onTap = () =>
-                              Navigator.pushReplacementNamed (context, Signup.routeName)),
+                          ..onTap = () => Navigator.pushReplacementNamed(
+                              context, Signup.routeName)),
                   ]),
             )
           ],

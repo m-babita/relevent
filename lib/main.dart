@@ -28,21 +28,22 @@ class MyApp extends StatelessWidget {
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: MultiProvider(
         providers: [
-        Provider<FirebaseAuthMethods>(
-          create: (_) => FirebaseAuthMethods(FirebaseAuth.instance),
-        ),
-        StreamProvider(
-          create: (context) => context.read<FirebaseAuthMethods>().authState,
-          initialData: null,
-        ),
-      ],
+          Provider<FirebaseAuthMethods>(
+            create: (_) => FirebaseAuthMethods(FirebaseAuth.instance),
+          ),
+          StreamProvider(
+            create: (context) => context.read<FirebaseAuthMethods>().authState,
+            initialData: null,
+          ),
+        ],
         child: MaterialApp(
           title: "Rel'Event",
           theme: ThemeData(
               primarySwatch: Colors.teal,
               elevatedButtonTheme: ElevatedButtonThemeData(
                   style: TextButton.styleFrom(
-                      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+                      padding:
+                          EdgeInsets.symmetric(vertical: 10, horizontal: 30),
                       shadowColor: Colors.teal,
                       elevation: 5,
                       shape: RoundedRectangleBorder(
@@ -51,7 +52,7 @@ class MyApp extends StatelessWidget {
                         color: Colors.white,
                         fontSize: 18,
                       ))),
-              textTheme: GoogleFonts.latoTextTheme(
+              textTheme: GoogleFonts.barlowTextTheme(
                 Theme.of(context).textTheme,
               )),
           debugShowCheckedModeBanner: false,

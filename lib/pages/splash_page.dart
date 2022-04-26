@@ -21,38 +21,27 @@ class _SplashState extends State<Splash> {
 
   toOnboard() async {
     await Future.delayed(Duration(milliseconds: 1500), () {});
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const AuthWrapper()));
+    Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (context) => const AuthWrapper()));
   }
 
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
+        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           SizedBox(
-            height: 150,
-            width: 150,
-            child: Image.asset("images/logo.png")
-          ),
+              height: 150, width: 150, child: Image.asset("images/logo.png")),
           RichText(
             text: TextSpan(
-              text:'Rel', style: TextStyle(
-              color: Colors.black,
-              fontSize: 24
-            ), 
-
-            children: [
-              TextSpan(
-                text: '\'Event', style: TextStyle(
-                  color: Colors.teal
-                )
-              )
-            ]
-            ),
+                text: 'Rel',
+                style: TextStyle(color: Colors.black, fontSize: 24),
+                children: [
+                  TextSpan(
+                      text: '\'Event', style: TextStyle(color: Colors.teal))
+                ]),
           )
         ]),
-        ),
+      ),
     );
   }
 }
