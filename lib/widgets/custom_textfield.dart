@@ -33,7 +33,7 @@ class CustomTextField extends StatelessWidget {
                     ? Icon(Icons.mail)
                     : labelText == 'Name'
                         ? Icon(Icons.person)
-                        : null,
+                        : Icon(Icons.search),
             suffixIcon:
                 labelText == 'Password' ? Icon(Icons.remove_red_eye) : null,
             border: OutlineInputBorder(

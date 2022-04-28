@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'dart:math';
 
 class CreateEvent extends StatefulWidget {
+  static String routeName = '/createEvent';
   const CreateEvent({Key? key}) : super(key: key);
 
   @override
@@ -48,7 +48,9 @@ class _CreateEventState extends State<CreateEvent> {
               height: 20,
             ),
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pop(context);
+              },
               icon: Icon(
                 CupertinoIcons.arrow_left,
                 color: Colors.teal,

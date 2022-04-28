@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:relevent/pages/home_page.dart';
+import 'package:relevent/pages/bottom_nav.dart';
 import 'package:relevent/pages/onboard_page.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -54,7 +54,7 @@ class AuthWrapper extends StatelessWidget {
     final firebaseUser = context.watch<User?>();
 
     if (firebaseUser != null) {
-      return const MyHomePage();
+      return const BottomNav();
     }
     return const Onboard();
   }

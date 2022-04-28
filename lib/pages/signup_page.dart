@@ -14,12 +14,11 @@ class Signup extends StatefulWidget {
 }
 
 class _SignupState extends State<Signup> {
- final TextEditingController emailController = TextEditingController();
- final TextEditingController nameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController nameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
 
   void signUpUser() async {
     context.read<FirebaseAuthMethods>().signUpWithEmail(
@@ -48,8 +47,8 @@ class _SignupState extends State<Signup> {
             Container(
                 height: 90, width: 90, child: Image.asset("images/logo.png")),
             Container(
-              height: h * 0.25,
-              child: Image.asset("images/login.png"),
+              height: h * 0.3,
+              child: Image.asset("images/signup.png"),
             ),
             const Text(
               "SignUp",
@@ -66,23 +65,22 @@ class _SignupState extends State<Signup> {
                 child: Column(
                   children: [
                     CustomTextField(
-                        controller: nameController,
-                        hintText: 'Enter your name',
-                        labelText: 'Name',
-                      ),
-                    SizedBox(height: 20),
-                     CustomTextField(
-                        controller: emailController,
-                        hintText: 'Enter your email',
-                        labelText: 'Email',
-                      ),
+                      controller: nameController,
+                      hintText: 'Enter your name',
+                      labelText: 'Name',
+                    ),
                     SizedBox(height: 20),
                     CustomTextField(
-                        controller: passwordController,
-                        hintText: 'Enter your password',
-                        labelText: 'Password',
-                      ),
-                    
+                      controller: emailController,
+                      hintText: 'Enter your email',
+                      labelText: 'Email',
+                    ),
+                    SizedBox(height: 20),
+                    CustomTextField(
+                      controller: passwordController,
+                      hintText: 'Enter your password',
+                      labelText: 'Password',
+                    ),
                     const SizedBox(height: 20),
                     Row(
                       children: [
@@ -120,8 +118,8 @@ class _SignupState extends State<Signup> {
                         text: "Log In",
                         style: TextStyle(color: Colors.teal),
                         recognizer: TapGestureRecognizer()
-                          ..onTap = () =>
-                              Navigator.pushReplacementNamed(context, Login.routeName)),
+                          ..onTap = () => Navigator.pushReplacementNamed(
+                              context, Login.routeName)),
                   ]),
             )
           ],

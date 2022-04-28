@@ -40,7 +40,7 @@ class _LoginState extends State<Login> {
             Container(
                 height: 90, width: 90, child: Image.asset("images/logo.png")),
             Container(
-              height: h * 0.25,
+              height: h * 0.3,
               child: Image.asset("images/login.png"),
             ),
             const Text(

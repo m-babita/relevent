@@ -2,9 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:relevent/pages/home_page.dart';
+import 'package:relevent/pages/bottom_nav.dart';
 import 'package:relevent/pages/login_page.dart';
-import 'package:relevent/utils/showSnackBar.dart';
+import 'package:relevent/utils/show_snackbar.dart';
 
 class FirebaseAuthMethods {
   final FirebaseAuth _auth;
@@ -48,7 +48,7 @@ class FirebaseAuthMethods {
       if (!_auth.currentUser!.emailVerified) {
         await sendEmailVerification(context);
       }
-      Navigator.pushNamed(context, MyHomePage.routeName);
+      Navigator.pushNamed(context, BottomNav.routeName);
     } on FirebaseAuthException catch (e) {
       showSnackBar(context, e.message!);
     }
@@ -90,7 +90,7 @@ class FirebaseAuthMethods {
               await _auth.signInWithCredential(credential);
         }
       }
-    } on FirebaseAuthException  catch (e) {
+    } on FirebaseAuthException catch (e) {
       showSnackBar(context, e.message!); // Displaying the error message
     }
   }

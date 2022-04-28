@@ -2,7 +2,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:relevent/pages/bottom_nav.dart';
+import 'package:relevent/pages/create_event.dart';
 import 'package:relevent/pages/home_page.dart';
+import 'package:relevent/pages/profile_page.dart';
 import 'package:relevent/pages/splash_page.dart';
 import 'package:relevent/pages/login_page.dart';
 import 'package:relevent/pages/signup_page.dart';
@@ -61,6 +64,9 @@ class MyApp extends StatelessWidget {
             Signup.routeName: (context) => Signup(),
             Login.routeName: (context) => Login(),
             Onboard.routeName: (context) => Onboard(),
+            CreateEvent.routeName: (context) => CreateEvent(),
+            Profile.routeName: (context) => Profile(),
+            BottomNav.routeName: (context) => BottomNav(),
             MyHomePage.routeName: (context) => MyHomePage(),
           },
         ),
