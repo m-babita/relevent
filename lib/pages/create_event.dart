@@ -125,7 +125,7 @@ class _CreateEventState extends State<CreateEvent> {
                   ),
                   label('Location'),
                   SizedBox(height: 8),
-                  title('Enter location'),
+                  location('Enter location'),
                   SizedBox(height: 30),
                   createEventButton(),
                   SizedBox(height: 30),
@@ -154,6 +154,7 @@ class _CreateEventState extends State<CreateEvent> {
                     "date": _dateString(),
                     "location": _locationController.text,
                   });
+                  Navigator.pop(context);
                 },
                 child: Text('Create Event'))
           ],
@@ -193,7 +194,8 @@ class _CreateEventState extends State<CreateEvent> {
         },
         child: Chip(
             elevation: 5,
-            backgroundColor: type==eventType?Colors.teal[800]:Colors.teal[300],
+            backgroundColor:
+                type == eventType ? Colors.teal[800] : Colors.teal[300],
             label: Text(
               eventType,
               style: TextStyle(color: Colors.white),

@@ -19,8 +19,8 @@ class EventCard extends StatelessWidget {
         children: [
           Expanded(
               child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 10),
-            height: 160,
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            height: MediaQuery.of(context).size.height * 0.2,
             child: Card(
               elevation: 5,
               shape: RoundedRectangleBorder(
@@ -32,7 +32,7 @@ class EventCard extends StatelessWidget {
                     height: 15,
                   ),
                   Container(
-                    width: 320,
+                    width: MediaQuery.of(context).size.width * 0.8,
                     padding: const EdgeInsets.all(15.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,

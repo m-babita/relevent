@@ -65,112 +65,121 @@ class _ProfileState extends State<Profile> {
         ),
       ),
       body: SingleChildScrollView(
-          child: Container(
-        padding: EdgeInsetsDirectional.all(12),
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        child: !isloggedin
-            ? CircularProgressIndicator()
-            : Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    height: 10,
-                  ),
-
-                  CircleAvatar(
-                    backgroundColor: Colors.teal[100],
-                    radius: 100,
-                    child: ClipOval(
-                      child: Image.asset(
-                        'images/profile.jpg',
-                        width: 190,
-                        height: 190,
-                        fit: BoxFit.cover,
+          child: !isloggedin
+              ? Center(child: CircularProgressIndicator())
+              : Container(
+                  padding: EdgeInsetsDirectional.all(12),
+                  height: MediaQuery.of(context).size.height,
+                  width: MediaQuery.of(context).size.width,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        height: 10,
                       ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  ElevatedButton(
-                    onPressed: (){},
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text('Change Profile',style: TextStyle(fontSize: 16),),
-                        SizedBox(
-                          width: 5,
+                      CircleAvatar(
+                        backgroundColor: Colors.teal[100],
+                        radius: 100,
+                        child: ClipOval(
+                          child: Image.asset(
+                            'images/profile.jpg',
+                            width: MediaQuery.of(context).size.height * 0.23,
+                            height: MediaQuery.of(context).size.height * 0.23,
+                            fit: BoxFit.cover,
+                          ),
                         ),
-                        Icon(
-                          Icons.edit,
-                          size: 16,
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: 30),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Hello,",
-                          style: TextStyle(
-                              color: Colors.teal,
-                              fontSize: 28,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        Text(
-                          "${user!.displayName}",
-                          style: TextStyle(
-                              color: Colors.teal,
-                              fontSize: 28,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        SizedBox(
-                          height: 30,
-                        ),
-                        Text('Email:', style: TextStyle(fontSize: 20, color: Colors.teal ),),
-                        Row(
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      ElevatedButton(
+                        onPressed: () {},
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
                           children: [
-                            Icon(Icons.mail,color: Colors.teal),
-                            SizedBox(width: 10,),
                             Text(
-                              "${user!.email}",
-                              style: TextStyle(
-                                  color: Colors.teal,
-                                  fontSize: 20,),
+                              'Change Profile',
+                              style: TextStyle(fontSize: 16),
+                            ),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Icon(
+                              Icons.edit,
+                              size: 16,
                             ),
                           ],
                         ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  ElevatedButton(
-                    onPressed: signout,
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text('Logout'),
-                        SizedBox(
-                          width: 5,
+                      ),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: 30),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Hello,",
+                              style: TextStyle(
+                                  color: Colors.teal,
+                                  fontSize: 28,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            Text(
+                              "${user!.displayName}",
+                              style: TextStyle(
+                                  color: Colors.teal,
+                                  fontSize: 28,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            SizedBox(
+                              height: 30,
+                            ),
+                            Text(
+                              'Email:',
+                              style:
+                                  TextStyle(fontSize: 20, color: Colors.teal),
+                            ),
+                            Row(
+                              children: [
+                                Icon(Icons.mail, color: Colors.teal),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Text(
+                                  "${user!.email}",
+                                  style: TextStyle(
+                                    color: Colors.teal,
+                                    fontSize: 20,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
-                        Icon(
-                          Icons.logout,
+                      ),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      ElevatedButton(
+                        onPressed: signout,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text('Logout'),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Icon(
+                              Icons.logout,
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-      )),
+                )),
     );
   }
 }

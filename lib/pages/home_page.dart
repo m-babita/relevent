@@ -5,6 +5,7 @@ import 'package:relevent/pages/create_event.dart';
 import 'package:relevent/pages/event_card.dart';
 import 'package:relevent/pages/event_details.dart';
 import 'package:relevent/pages/onboard_page.dart';
+import 'package:relevent/pages/profile_page.dart';
 import 'package:relevent/utils/extensions.dart';
 import 'package:relevent/widgets/custom_textfield.dart';
 
@@ -78,23 +79,28 @@ class _MyHomePageState extends State<MyHomePage> {
             ],
           ),
           actions: [
-            Row(
-              children: [
-                CircleAvatar(
-                  radius: 20,
-                  child: ClipOval(
-                    child: Image.asset(
-                      'images/profile.jpg',
-                      width: 100,
-                      height: 100,
-                      fit: BoxFit.cover,
+            InkWell(
+              onTap: () {
+                Navigator.pushNamed(context, Profile.routeName);
+              },
+              child: Row(
+                children: [
+                  CircleAvatar(
+                    radius: 20,
+                    child: ClipOval(
+                      child: Image.asset(
+                        'images/profile.jpg',
+                        width: 100,
+                        height: 100,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
-                ),
-                SizedBox(
-                  width: 10,
-                ),
-              ],
+                  SizedBox(
+                    width: 10,
+                  ),
+                ],
+              ),
             ),
           ]),
       body: !isloggedin
