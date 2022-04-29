@@ -1,8 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:relevent/pages/create_event.dart';
 import 'package:relevent/pages/event_card.dart';
+import 'package:relevent/pages/event_details.dart';
 import 'package:relevent/pages/onboard_page.dart';
+import 'package:relevent/utils/extensions.dart';
 import 'package:relevent/widgets/custom_textfield.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -19,10 +22,14 @@ class _MyHomePageState extends State<MyHomePage> {
   final TextEditingController searchController = TextEditingController();
   bool isloggedin = false;
 
+  //firestore
+  final Stream<QuerySnapshot> _stream =
+      FirebaseFirestore.instance.collection("EventDetails").snapshots();
+
   checkAuthentification() async {
     _auth.authStateChanges().listen((user) {
       if (user == null) {
-        Navigator.pushReplacementNamed(context, Onboard.routeName);
+        Navigator.pushNamed(context, Onboard.routeName);
       }
     });
   }
@@ -38,10 +45,6 @@ class _MyHomePageState extends State<MyHomePage> {
         this.isloggedin = true;
       });
     }
-  }
-
-  signout() async {
-    _auth.signOut();
   }
 
   int _counter = 0;
@@ -94,69 +97,69 @@ class _MyHomePageState extends State<MyHomePage> {
               ],
             ),
           ]),
-      body: Container(
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        child: SingleChildScrollView(
-          child: Container(
-            child: !isloggedin
-                ? CircularProgressIndicator()
-                : Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 25, vertical: 10),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          height: 10,
-                        ),
-                        CustomTextField(
-                          controller: searchController,
-                          hintText: '',
-                          labelText: '',
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        EventCard(
-                            title: 'Workshop Series',
-                            type: 'Session',
-                            date: '24 | 03 | 22',
-                            description:
-                                'Workshop on various topic like Blockchain, Cryptocurrency, Algo Tradding and much more.'),
-                        SizedBox(
-                          height: 15,
-                        ),
-                        EventCard(
-                            title: 'Summer Internship',
-                            type: 'Program',
-                            date: '15 | 04 | 22',
-                            description:
-                                'This program is help you build resume and interview preparations in various domains.'),
-                        SizedBox(
-                          height: 15,
-                        ),
-                        EventCard(
-                            title: 'Data Science Bootcamp',
-                            type: 'Session',
-                            date: '18 | 05 | 22',
-                            description:
-                                'This program is help you build concepts of Data Science using python.'),
-                        SizedBox(
-                          height: 15,
-                        ),
-                        EventCard(
-                            title: 'Hacktober Fest',
-                            type: 'Technical Event',
-                            date: '10 | 10 | 22',
-                            description:
-                                'Open Source contribution, Register now and start contributing on github.'),
-                      ],
-                    ),
+      body: !isloggedin
+          ? Center(child: CircularProgressIndicator())
+          : StreamBuilder<QuerySnapshot>(
+              stream: _stream,
+              builder: ((context, snapshot) {
+                if (!snapshot.hasData) {
+                  return Center(child: CircularProgressIndicator());
+                }
+                return SingleChildScrollView(
+                    child: Column(children: [
+                  SizedBox(
+                    height: 20,
                   ),
-          ),
-        ),
-      ),
+                  CustomTextField(
+                    controller: searchController,
+                    hintText: '',
+                    labelText: '',
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  ListView.builder(
+                      physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: snapshot.data!.docs.length,
+                      itemBuilder: (context, index) {
+                        Map<String, dynamic> document =
+                            snapshot.data!.docs[index].data()
+                                as Map<String, dynamic>;
+                        return Column(children: [
+                          SizedBox(
+                            height: 10,
+                          ),
+                          InkWell(
+                            onTap: () {
+                              Navigator.pushNamed(
+                                  context, EventDetails.routeName);
+                            },
+                            child: EventCard(
+                                title: document['title'] == ""
+                                    ? "Event Title"
+                                    : document['title'],
+                                type: document['type'] == ""
+                                    ? "Others"
+                                    : document['type'],
+                                date: document['date'] == "Select date Of Event"
+                                    ? "soon"
+                                    : document['date'],
+                                description: document['description'] == null
+                                    ? "description of event"
+                                    : truncateString(document['description'])),
+                          ),
+                          SizedBox(
+                            height: 5,
+                          )
+                        ]);
+                      }),
+                  SizedBox(
+                    height: 20,
+                  ),
+                ]));
+              })),
+
       floatingActionButton: FloatingActionButton(
         onPressed: createEvent,
         child: const Icon(Icons.add),

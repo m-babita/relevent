@@ -37,8 +37,7 @@ class _ProfileState extends State<Profile> {
   }
 
   signout() async {
-    _auth.signOut();
-    Navigator.pushReplacementNamed(context, Onboard.routeName);
+    await _auth.signOut();
   }
 
   @override

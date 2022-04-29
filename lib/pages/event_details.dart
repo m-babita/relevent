@@ -1,21 +1,16 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class CreateEvent extends StatefulWidget {
-  static String routeName = '/createEvent';
-  const CreateEvent({Key? key}) : super(key: key);
+class EventDetails extends StatefulWidget {
+  static String routeName = '/eventDetails';
+  const EventDetails({Key? key}) : super(key: key);
 
   @override
-  State<CreateEvent> createState() => _CreateEventState();
+  State<EventDetails> createState() => _EventDetailsState();
 }
 
-class _CreateEventState extends State<CreateEvent> {
+class _EventDetailsState extends State<EventDetails> {
   DateTime? _date;
-  String type = "";
-  final TextEditingController _titleController = TextEditingController();
-  final TextEditingController _descriptionController = TextEditingController();
-  final TextEditingController _locationController = TextEditingController();
 
   pickDate() async {
     final result = await showDatePicker(
@@ -31,16 +26,16 @@ class _CreateEventState extends State<CreateEvent> {
     }
   }
 
-  _dateString() {
-    if (_date == null) {
-      return 'Select date Of Event';
-    } else {
-      return '${_date?.day} | ${_date?.month} | ${_date?.year}';
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
+    _dateString() {
+      if (_date == null) {
+        return 'Select date Of Event';
+      } else {
+        return '${_date?.day} | ${_date?.month} | ${_date?.year}';
+      }
+    }
+
     return Scaffold(
         body: Container(
       height: MediaQuery.of(context).size.height,
@@ -145,17 +140,7 @@ class _CreateEventState extends State<CreateEvent> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            ElevatedButton(
-                onPressed: () {
-                  FirebaseFirestore.instance.collection('EventDetails').add({
-                    "title": _titleController.text,
-                    "type": type,
-                    "description": _descriptionController.text,
-                    "date": _dateString(),
-                    "location": _locationController.text,
-                  });
-                },
-                child: Text('Create Event'))
+            ElevatedButton(onPressed: () {}, child: Text('Create Event'))
           ],
         ));
   }
@@ -167,7 +152,6 @@ class _CreateEventState extends State<CreateEvent> {
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(25), color: Colors.teal[100]),
         child: TextFormField(
-          controller: _descriptionController,
           style: TextStyle(fontSize: 17),
           maxLines: null,
           decoration: InputDecoration(
@@ -184,20 +168,14 @@ class _CreateEventState extends State<CreateEvent> {
       );
 
 //event type
-  Widget category(String eventType) {
-    return InkWell(
-        onTap: () {
-          setState(() {
-            type = eventType;
-          });
-        },
-        child: Chip(
-            elevation: 5,
-            backgroundColor: type==eventType?Colors.teal[800]:Colors.teal[300],
-            label: Text(
-              eventType,
-              style: TextStyle(color: Colors.white),
-            )));
+  Widget category(String type) {
+    return Chip(
+        backgroundColor: Colors.teal[400],
+        // Colors.accents[Random().nextInt(Colors.accents.length)],
+        label: Text(
+          type,
+          style: TextStyle(color: Colors.white),
+        ));
   }
 
 //title
@@ -207,29 +185,6 @@ class _CreateEventState extends State<CreateEvent> {
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(25), color: Colors.teal[100]),
         child: TextFormField(
-          controller: _titleController,
-          style: TextStyle(fontSize: 17),
-          decoration: InputDecoration(
-              hintText: titleText,
-              border: InputBorder.none,
-              focusedBorder: InputBorder.none,
-              enabledBorder: InputBorder.none,
-              errorBorder: InputBorder.none,
-              disabledBorder: InputBorder.none,
-              contentPadding:
-                  EdgeInsets.only(left: 15, bottom: 11, top: 11, right: 15),
-              hintStyle: TextStyle(fontSize: 17)),
-        ),
-      );
-
-//location
-  Widget location(String titleText) => Container(
-        height: 55,
-        width: MediaQuery.of(context).size.width,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(25), color: Colors.teal[100]),
-        child: TextFormField(
-          controller: _locationController,
           style: TextStyle(fontSize: 17),
           decoration: InputDecoration(
               hintText: titleText,

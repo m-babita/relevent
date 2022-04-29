@@ -25,6 +25,7 @@ class _SplashState extends State<Splash> {
         context, MaterialPageRoute(builder: (context) => const AuthWrapper()));
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
@@ -32,7 +33,7 @@ class _SplashState extends State<Splash> {
           SizedBox(
               height: 150, width: 150, child: Image.asset("images/logo.png")),
           RichText(
-            text: TextSpan(
+            text: const TextSpan(
                 text: 'Rel',
                 style: TextStyle(color: Colors.black, fontSize: 24),
                 children: [

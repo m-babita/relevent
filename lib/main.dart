@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:relevent/pages/bottom_nav.dart';
 import 'package:relevent/pages/create_event.dart';
+import 'package:relevent/pages/event_details.dart';
 import 'package:relevent/pages/home_page.dart';
 import 'package:relevent/pages/profile_page.dart';
 import 'package:relevent/pages/splash_page.dart';
@@ -65,6 +66,7 @@ class MyApp extends StatelessWidget {
             Login.routeName: (context) => Login(),
             Onboard.routeName: (context) => Onboard(),
             CreateEvent.routeName: (context) => CreateEvent(),
+            EventDetails.routeName: (context) => EventDetails(),
             Profile.routeName: (context) => Profile(),
             BottomNav.routeName: (context) => BottomNav(),
             MyHomePage.routeName: (context) => MyHomePage(),
