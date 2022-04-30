@@ -14,6 +14,7 @@ class _ProfileState extends State<Profile> {
   User? user;
   final FirebaseAuth _auth = FirebaseAuth.instance;
   bool isloggedin = false;
+  bool isSwitched = false;
 
   checkAuthentification() async {
     _auth.authStateChanges().listen((user) {
@@ -82,7 +83,7 @@ class _ProfileState extends State<Profile> {
                         radius: 100,
                         child: ClipOval(
                           child: Image.asset(
-                            'images/profile.jpg',
+                            'images/avatar.png',
                             width: MediaQuery.of(context).size.height * 0.23,
                             height: MediaQuery.of(context).size.height * 0.23,
                             fit: BoxFit.cover,
@@ -138,8 +139,13 @@ class _ProfileState extends State<Profile> {
                             ),
                             Text(
                               'Email:',
-                              style:
-                                  TextStyle(fontSize: 20, color: Colors.teal),
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                  color: Colors.teal),
+                            ),
+                            SizedBox(
+                              height: 10,
                             ),
                             Row(
                               children: [
@@ -156,6 +162,29 @@ class _ProfileState extends State<Profile> {
                                 ),
                               ],
                             ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Row(children: [
+                              Text(
+                                'Are you organizer?:',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20,
+                                    color: Colors.teal),
+                              ),
+                              Switch(
+                                value: isSwitched,
+                                onChanged: (value) {
+                                  setState(() {
+                                    isSwitched = value;
+                                    print(isSwitched);
+                                  });
+                                },
+                                activeTrackColor: Colors.teal[100],
+                                activeColor: Colors.teal,
+                              ),
+                            ]),
                           ],
                         ),
                       ),
@@ -173,6 +202,40 @@ class _ProfileState extends State<Profile> {
                             ),
                             Icon(
                               Icons.logout,
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      ElevatedButton(
+                        style: ButtonStyle(
+                          padding: MaterialStateProperty.resolveWith<
+                              EdgeInsetsGeometry>(
+                            (Set<MaterialState> states) {
+                              return EdgeInsets.all(6);
+                            },
+                          ),
+                        ),
+                        onPressed: () => showAboutDialog(
+                            context: context,
+                            applicationIcon: FlutterLogo(),
+                            applicationVersion: '1.0.0',
+                            applicationLegalese: 'Babita Majumdar'),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              'About App',
+                              style: TextStyle(fontSize: 16),
+                            ),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Icon(
+                              Icons.settings_rounded,
+                              size: 16,
                             ),
                           ],
                         ),

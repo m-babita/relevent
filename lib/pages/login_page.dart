@@ -1,4 +1,6 @@
 import 'package:flutter/gestures.dart';
+import 'package:flutter_signin_button/button_list.dart';
+import 'package:flutter_signin_button/button_view.dart';
 import 'package:relevent/services/firebase_auth_methods.dart';
 import 'package:relevent/pages/signup_page.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +20,10 @@ class _LoginState extends State<Login> {
   final TextEditingController passwordController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
+  googleSignin() async {
+    context.read<FirebaseAuthMethods>().signInWithGoogle(context);
+  }
+
   void loginUser() {
     context.read<FirebaseAuthMethods>().loginWithEmail(
           email: emailController.text,
@@ -36,7 +42,7 @@ class _LoginState extends State<Login> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(height: h * 0.05),
+            SizedBox(height: h * 0.01),
             Container(
                 height: 90, width: 90, child: Image.asset("images/logo.png")),
             Container(
@@ -47,7 +53,7 @@ class _LoginState extends State<Login> {
               "Login",
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: h * 0.02),
+            SizedBox(height: h * 0.01),
             Text('Please login to continue using our app'),
             SizedBox(height: h * 0.02),
             Container(
@@ -77,7 +83,7 @@ class _LoginState extends State<Login> {
                         Text("Forgot Password?"),
                       ],
                     ),
-                    SizedBox(height: 25),
+                    SizedBox(height: 20),
                     ElevatedButton(
                       onPressed: loginUser,
                       style: ButtonStyle(
@@ -94,7 +100,7 @@ class _LoginState extends State<Login> {
               ),
             ),
             SizedBox(
-              height: 20,
+              height: 15,
             ),
             RichText(
               text: TextSpan(
@@ -108,7 +114,16 @@ class _LoginState extends State<Login> {
                           ..onTap = () => Navigator.pushReplacementNamed(
                               context, Signup.routeName)),
                   ]),
-            )
+            ),
+            Column(children: [
+              Text('or'),
+              SignInButton(
+                Buttons.Google,
+                text: "Sign in with Google",
+                onPressed: googleSignin,
+              )
+            ]),
+            SizedBox(height: h * 0.02),
           ],
         ),
       ),

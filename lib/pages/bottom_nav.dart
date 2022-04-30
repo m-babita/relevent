@@ -28,7 +28,7 @@ class _BottomNavState extends State<BottomNav> {
   getUser() async {
     User? firebaseUser = await _auth.currentUser;
     await firebaseUser?.reload();
-    firebaseUser = await _auth.currentUser;
+    firebaseUser = _auth.currentUser;
 
     if (firebaseUser != null) {
       setState(() {

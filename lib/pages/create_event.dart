@@ -95,6 +95,15 @@ class _CreateEventState extends State<CreateEvent> {
                       SizedBox(width: 8),
                       category('Campaign'),
                       SizedBox(width: 8),
+                      category('Webinar'),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      category('Technical Event'),
+                      SizedBox(width: 8),
+                      category('Fest'),
+                      SizedBox(width: 8),
                       category('Other'),
                     ],
                   ),

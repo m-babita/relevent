@@ -48,8 +48,6 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
-  int _counter = 0;
-
   createEvent() {
     Navigator.pushNamed(context, CreateEvent.routeName);
   }
@@ -86,10 +84,10 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Row(
                 children: [
                   CircleAvatar(
-                    radius: 20,
+                    radius: 18,
                     child: ClipOval(
                       child: Image.asset(
-                        'images/profile.jpg',
+                        'images/avatar.png',
                         width: 100,
                         height: 100,
                         fit: BoxFit.cover,
@@ -138,8 +136,12 @@ class _MyHomePageState extends State<MyHomePage> {
                           ),
                           InkWell(
                             onTap: () {
-                              Navigator.pushNamed(
-                                  context, EventDetails.routeName);
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (builder) => EventDetails(
+                                            document: document,
+                                          )));
                             },
                             child: EventCard(
                                 title: document['title'] == ""
@@ -165,8 +167,9 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ]));
               })),
-
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.teal[400],
+        elevation: 5,
         onPressed: createEvent,
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
