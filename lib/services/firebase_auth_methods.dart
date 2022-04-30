@@ -3,7 +3,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:relevent/pages/bottom_nav.dart';
-import 'package:relevent/pages/login_page.dart';
 import 'package:relevent/utils/show_snackbar.dart';
 
 class FirebaseAuthMethods {
@@ -30,7 +29,7 @@ class FirebaseAuthMethods {
       if (user != null) {
         await _auth.currentUser!.updateDisplayName(name);
       }
-      Navigator.pushNamed(context, Login.routeName);
+      Navigator.pushNamed(context, BottomNav.routeName);
     } on FirebaseAuthException catch (e) {
       showSnackBar(context, e.message!);
     }
@@ -64,6 +63,21 @@ class FirebaseAuthMethods {
     }
   }
 
+//email reset
+  Future<void> resetPassword({
+    required String email,
+    required BuildContext context,
+  }) async {
+    try {
+      await _auth
+          .sendPasswordResetEmail(email: email)
+          .then((value) => Navigator.pop(context));
+          showSnackBar(context, 'Email verification sent!');
+    } on FirebaseAuthException catch (e) {
+      showSnackBar(context, e.message!); // Displaying the error message
+    }
+  }
+
 //google signin
   Future<void> signInWithGoogle(BuildContext context) async {
     try {
@@ -90,6 +104,7 @@ class FirebaseAuthMethods {
               await _auth.signInWithCredential(credential);
         }
       }
+      Navigator.pushNamed(context, BottomNav.routeName);
     } on FirebaseAuthException catch (e) {
       showSnackBar(context, e.message!); // Displaying the error message
     }

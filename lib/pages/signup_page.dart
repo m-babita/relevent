@@ -20,8 +20,6 @@ class _SignupState extends State<Signup> {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
   googleSignin() async {
     context.read<FirebaseAuthMethods>().signInWithGoogle(context);
   }
@@ -49,9 +47,9 @@ class _SignupState extends State<Signup> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(height: h * 0.01),
+            SizedBox(height: h * 0.04),
             Container(
-                height: 90, width: 90, child: Image.asset("images/logo.png")),
+                height: 60, width: 60, child: Image.asset("images/logo.png")),
             Container(
               height: h * 0.3,
               child: Image.asset("images/signup.png"),
@@ -64,10 +62,9 @@ class _SignupState extends State<Signup> {
             Text('Please fill the details and create account'),
             SizedBox(height: h * 0.02),
             Container(
-              margin: const EdgeInsets.symmetric(horizontal: 20),
+              margin: const EdgeInsets.symmetric(horizontal: 25),
               width: w,
               child: Form(
-                key: _formKey,
                 child: Column(
                   children: [
                     CustomTextField(

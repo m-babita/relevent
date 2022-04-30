@@ -38,12 +38,12 @@ class _MyHomePageState extends State<MyHomePage> {
   getUser() async {
     User? firebaseUser = _auth.currentUser;
     await firebaseUser?.reload();
-    firebaseUser = await _auth.currentUser;
+    firebaseUser = _auth.currentUser;
 
     if (firebaseUser != null) {
       setState(() {
-        this.user = firebaseUser;
-        this.isloggedin = true;
+        user = firebaseUser;
+        isloggedin = true;
       });
     }
   }
@@ -69,7 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ),
           title: Row(
-            children: [
+            children:const [
               SizedBox(
                 width: 10,
               ),

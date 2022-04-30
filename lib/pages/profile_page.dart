@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:relevent/pages/login_page.dart';
 import 'package:relevent/pages/onboard_page.dart';
 
 class Profile extends StatefulWidget {
@@ -38,7 +39,9 @@ class _ProfileState extends State<Profile> {
   }
 
   signout() async {
-    await _auth.signOut();
+    await _auth.signOut().then((value) {
+      Navigator.pushNamed(context, Login.routeName);
+    });
   }
 
   @override
@@ -57,7 +60,7 @@ class _ProfileState extends State<Profile> {
           ),
         ),
         title: Row(
-          children: [
+          children: const [
             SizedBox(
               width: 10,
             ),
@@ -97,7 +100,7 @@ class _ProfileState extends State<Profile> {
                         onPressed: () {},
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
-                          children: [
+                          children: const [
                             Text(
                               'Change Profile',
                               style: TextStyle(fontSize: 16),
@@ -178,7 +181,6 @@ class _ProfileState extends State<Profile> {
                                 onChanged: (value) {
                                   setState(() {
                                     isSwitched = value;
-                                    print(isSwitched);
                                   });
                                 },
                                 activeTrackColor: Colors.teal[100],
@@ -195,7 +197,7 @@ class _ProfileState extends State<Profile> {
                         onPressed: signout,
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
-                          children: [
+                          children: const [
                             Text('Logout'),
                             SizedBox(
                               width: 5,
@@ -225,7 +227,7 @@ class _ProfileState extends State<Profile> {
                             applicationLegalese: 'Babita Majumdar'),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
-                          children: [
+                          children: const [
                             Text(
                               'About App',
                               style: TextStyle(fontSize: 16),

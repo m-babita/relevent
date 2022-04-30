@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
+import 'package:relevent/pages/reset_password.dart';
 import 'package:relevent/services/firebase_auth_methods.dart';
 import 'package:relevent/pages/signup_page.dart';
 import 'package:flutter/material.dart';
@@ -42,9 +43,9 @@ class _LoginState extends State<Login> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(height: h * 0.01),
+            SizedBox(height: h * 0.04),
             Container(
-                height: 90, width: 90, child: Image.asset("images/logo.png")),
+                height: 60, width: 60, child: Image.asset("images/logo.png")),
             Container(
               height: h * 0.3,
               child: Image.asset("images/login.png"),
@@ -57,7 +58,7 @@ class _LoginState extends State<Login> {
             Text('Please login to continue using our app'),
             SizedBox(height: h * 0.02),
             Container(
-              margin: const EdgeInsets.symmetric(horizontal: 20),
+              margin: const EdgeInsets.symmetric(horizontal: 25),
               width: w,
               child: Form(
                 key: _formKey,
@@ -74,13 +75,19 @@ class _LoginState extends State<Login> {
                       hintText: 'Enter your password',
                       labelText: 'Password',
                     ),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 10),
                     Row(
                       children: [
                         Expanded(
                           child: Container(),
                         ),
-                        Text("Forgot Password?"),
+                        TextButton(
+                          child: Text("Forgot Password?"),
+                          onPressed: () {
+                            Navigator.pushNamed(
+                                context, ResetPassword.routeName);
+                          },
+                        ),
                       ],
                     ),
                     SizedBox(height: 20),

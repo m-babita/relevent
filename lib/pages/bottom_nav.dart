@@ -26,14 +26,14 @@ class _BottomNavState extends State<BottomNav> {
   }
 
   getUser() async {
-    User? firebaseUser = await _auth.currentUser;
+    User? firebaseUser = _auth.currentUser;
     await firebaseUser?.reload();
     firebaseUser = _auth.currentUser;
 
     if (firebaseUser != null) {
       setState(() {
-        this.user = firebaseUser;
-        this.isloggedin = true;
+        user = firebaseUser;
+        isloggedin = true;
       });
     }
   }

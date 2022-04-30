@@ -19,11 +19,11 @@ class _OnboardState extends State<Onboard> {
   }
 
   toLogin() async {
-    Navigator.pushReplacementNamed(context, Login.routeName);
+    Navigator.pushNamed(context, Login.routeName);
   }
 
   toSignup() async {
-    Navigator.pushReplacementNamed(context, Signup.routeName);
+    Navigator.pushNamed(context, Signup.routeName);
   }
 
   @override
@@ -36,10 +36,10 @@ class _OnboardState extends State<Onboard> {
               // decoration: new BoxDecoration(color: Colors.white),
               child: Column(
                 children: [
-                  SizedBox(height: 20),
+                  SizedBox(height: 30),
                   SizedBox(
-                      height: 100,
-                      width: 100,
+                      height: 60,
+                      width: 60,
                       child: Image.asset("images/logo.png")),
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.3,
@@ -69,24 +69,24 @@ class _OnboardState extends State<Onboard> {
                     children: [
                       ElevatedButton(
                         onPressed: toLogin,
-                        child: Text('LogIn'),
                         style: ButtonStyle(
                           minimumSize: MaterialStateProperty.all(
                             Size(MediaQuery.of(context).size.width / 3, 50),
                           ),
                         ),
+                        child: Text('LogIn'),
                       ),
                       SizedBox(
                         width: 50.0,
                       ),
                       ElevatedButton(
                         onPressed: toSignup,
-                        child: Text('SignUp'),
                         style: ButtonStyle(
                           minimumSize: MaterialStateProperty.all(
                             Size(MediaQuery.of(context).size.width / 3, 50),
                           ),
                         ),
+                        child: Text('SignUp'),
                       ),
                     ],
                   ),

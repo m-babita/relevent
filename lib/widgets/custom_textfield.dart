@@ -14,7 +14,7 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        width: MediaQuery.of(context).size.width * 0.9,
+        width: 700,
         decoration: const BoxDecoration(
           boxShadow: [
             BoxShadow(

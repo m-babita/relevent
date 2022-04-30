@@ -12,8 +12,7 @@ class EventDetails extends StatefulWidget {
 }
 
 class _EventDetailsState extends State<EventDetails> {
-  DateTime? _date;
-
+  
   String type = "", date = "";
   TextEditingController? _titleController;
   TextEditingController? _descriptionController;
@@ -22,29 +21,16 @@ class _EventDetailsState extends State<EventDetails> {
   @override
   void initState() {
     super.initState();
-    String title = widget.document['title'] == null
-        ? "Event Name"
-        : widget.document['title'];
+    String title = widget.document['title'] ?? "Event Name";
     _titleController = TextEditingController(text: title);
-    String description = widget.document['description'] == null
-        ? "Event Name"
-        : widget.document['description'];
+    String description = widget.document['description'] ?? "Event Name";
     _descriptionController = TextEditingController(text: description);
-    String location = widget.document['location'] == null
-        ? "Event Name"
-        : widget.document['location'];
+    String location = widget.document['location'] ?? "Event Name";
     _locationController = TextEditingController(text: location);
     type = widget.document['type'];
     date = widget.document['date'];
   }
 
-  _dateString() {
-    if (_date == null) {
-      return 'Select date Of Event';
-    } else {
-      return '${_date?.day} | ${_date?.month} | ${_date?.year}';
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
