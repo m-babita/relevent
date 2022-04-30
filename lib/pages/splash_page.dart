@@ -31,7 +31,13 @@ class _SplashState extends State<Splash> {
       body: Center(
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           SizedBox(
-              height: 150, width: 150, child: Image.asset("images/logo.png")),
+            height: 100,
+            width: 100,
+            child: Image.asset("images/logo.png"),
+          ),
+          SizedBox(
+            height: 15,
+          ),
           RichText(
             text: const TextSpan(
                 text: 'Rel',
