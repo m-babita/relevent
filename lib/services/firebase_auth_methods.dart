@@ -24,12 +24,13 @@ class FirebaseAuthMethods {
     try {
       UserCredential user = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
-      await sendEmailVerification(context);
+      await sendEmailVerification(context)
+          .then((value) => Navigator.pushNamed(context, BottomNav.routeName));
 
       if (user != null) {
         await _auth.currentUser!.updateDisplayName(name);
       }
-      Navigator.pushNamed(context, BottomNav.routeName);
+      ;
     } on FirebaseAuthException catch (e) {
       showSnackBar(context, e.message!);
     }
@@ -45,9 +46,10 @@ class FirebaseAuthMethods {
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
       if (!_auth.currentUser!.emailVerified) {
-        await sendEmailVerification(context);
+        await sendEmailVerification(context)
+            .then((value) => Navigator.pushNamed(context, BottomNav.routeName));
       }
-      Navigator.pushNamed(context, BottomNav.routeName);
+      ;
     } on FirebaseAuthException catch (e) {
       showSnackBar(context, e.message!);
     }
@@ -72,7 +74,7 @@ class FirebaseAuthMethods {
       await _auth
           .sendPasswordResetEmail(email: email)
           .then((value) => Navigator.pop(context));
-          showSnackBar(context, 'Email verification sent!');
+      showSnackBar(context, 'Email verification sent!');
     } on FirebaseAuthException catch (e) {
       showSnackBar(context, e.message!); // Displaying the error message
     }

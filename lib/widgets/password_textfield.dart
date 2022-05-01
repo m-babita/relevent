@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class CustomTextField extends StatefulWidget {
-  const CustomTextField({
+class PasswordTextField extends StatefulWidget {
+  const PasswordTextField({
     Key? key,
     required this.controller,
     required this.hintText,
@@ -12,12 +12,19 @@ class CustomTextField extends StatefulWidget {
   final String hintText, labelText;
 
   @override
-  State<CustomTextField> createState() => _CustomTextFieldState();
+  State<PasswordTextField> createState() => _PasswordTextFieldState();
 }
 
-class _CustomTextFieldState extends State<CustomTextField> {
+class _PasswordTextFieldState extends State<PasswordTextField> {
   @override
   Widget build(BuildContext context) {
+    bool passObscure = true;
+    toggleview() {
+      setState(() {
+        passObscure = !passObscure;
+      });
+    }
+
     return Container(
         width: 700,
         decoration: const BoxDecoration(
@@ -30,14 +37,14 @@ class _CustomTextFieldState extends State<CustomTextField> {
           ],
         ),
         child: TextFormField(
+          obscureText: passObscure,
           controller: widget.controller,
           decoration: InputDecoration(
-            prefixIcon:  widget.labelText == 'Email'
-                    ? Icon(Icons.mail)
-                    : widget.labelText == 'Name'
-                        ? Icon(Icons.person)
-                        : Icon(Icons.search),
-            
+            prefixIcon: Icon(Icons.lock),
+            suffixIcon: IconButton(
+              onPressed: () => toggleview(),
+              icon: Icon(passObscure ? Icons.visibility : Icons.visibility_off),
+            ),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
               borderSide:

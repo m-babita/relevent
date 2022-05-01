@@ -6,6 +6,7 @@ import 'package:relevent/pages/login_page.dart';
 import 'package:relevent/widgets/custom_textfield.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
+import 'package:relevent/widgets/password_textfield.dart';
 
 class Signup extends StatefulWidget {
   static String routeName = '/signup';
@@ -79,7 +80,7 @@ class _SignupState extends State<Signup> {
                       labelText: 'Email',
                     ),
                     SizedBox(height: 20),
-                    CustomTextField(
+                    PasswordTextField(
                       controller: passwordController,
                       hintText: 'Enter your password',
                       labelText: 'Password',
