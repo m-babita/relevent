@@ -74,7 +74,7 @@ class FirebaseAuthMethods {
       await _auth
           .sendPasswordResetEmail(email: email)
           .then((value) => Navigator.pop(context));
-      showSnackBar(context, 'Email verification sent!');
+      showSnackBar(context, 'Reset Link sent to your email!');
     } on FirebaseAuthException catch (e) {
       showSnackBar(context, e.message!); // Displaying the error message
     }

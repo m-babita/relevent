@@ -69,7 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ),
           title: Row(
-            children:const [
+            children: const [
               SizedBox(
                 width: 10,
               ),
@@ -110,62 +110,71 @@ class _MyHomePageState extends State<MyHomePage> {
                   return Center(child: CircularProgressIndicator());
                 }
                 return SingleChildScrollView(
-                    child: Column(children: [
-                  SizedBox(
-                    height: 20,
-                  ),
-                  CustomTextField(
-                    controller: searchController,
-                    hintText: '',
-                    labelText: '',
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  ListView.builder(
-                      physics: NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: snapshot.data!.docs.length,
-                      itemBuilder: (context, index) {
-                        Map<String, dynamic> document =
-                            snapshot.data!.docs[index].data()
-                                as Map<String, dynamic>;
-                        return Column(children: [
-                          SizedBox(
-                            height: 10,
-                          ),
-                          InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (builder) => EventDetails(
-                                            document: document,
-                                          )));
-                            },
-                            child: EventCard(
-                                title: document['title'] == ""
-                                    ? "Event Title"
-                                    : document['title'],
-                                type: document['type'] == ""
-                                    ? "Others"
-                                    : document['type'],
-                                date: document['date'] == "Select date Of Event"
-                                    ? "soon"
-                                    : document['date'],
-                                description: document['description'] == null
-                                    ? "description of event"
-                                    : truncateString(document['description'])),
-                          ),
-                          SizedBox(
-                            height: 5,
-                          )
-                        ]);
-                      }),
-                  SizedBox(
-                    height: 20,
-                  ),
-                ]));
+                  child: Column(children: [
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Container(
+                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      child: CustomTextField(
+                        controller: searchController,
+                        hintText: '',
+                        labelText: '',
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    ListView.builder(
+                        physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: snapshot.data!.docs.length,
+                        itemBuilder: (context, index) {
+                          Map<String, dynamic> document =
+                              snapshot.data!.docs[index].data()
+                                  as Map<String, dynamic>;
+                          return Container(
+                              padding: EdgeInsets.symmetric(horizontal: 10),
+                              child: Column(children: [
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                InkWell(
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (builder) => EventDetails(
+                                                  document: document,
+                                                )));
+                                  },
+                                  child: EventCard(
+                                      title: document['title'] == ""
+                                          ? "Event Title"
+                                          : document['title'],
+                                      type: document['type'] == ""
+                                          ? "Others"
+                                          : document['type'],
+                                      date: document['date'] ==
+                                              "Select date Of Event"
+                                          ? "soon"
+                                          : document['date'],
+                                      description:
+                                          document['description'] == null
+                                              ? "description of event"
+                                              : truncateString(
+                                                  document['description'])),
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                )
+                              ]));
+                        }),
+                    SizedBox(
+                      height: 20,
+                    ),
+                  ]),
+                );
               })),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.teal[400],

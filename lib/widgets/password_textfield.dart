@@ -16,15 +16,15 @@ class PasswordTextField extends StatefulWidget {
 }
 
 class _PasswordTextFieldState extends State<PasswordTextField> {
+  bool passObscure = true;
+  toggleview() {
+    setState(() {
+      passObscure = !passObscure;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    bool passObscure = true;
-    toggleview() {
-      setState(() {
-        passObscure = !passObscure;
-      });
-    }
-
     return Container(
         width: 700,
         decoration: const BoxDecoration(

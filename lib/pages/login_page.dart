@@ -20,7 +20,6 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   googleSignin() async {
     context.read<FirebaseAuthMethods>().signInWithGoogle(context);
@@ -62,7 +61,6 @@ class _LoginState extends State<Login> {
               margin: const EdgeInsets.symmetric(horizontal: 25),
               width: w,
               child: Form(
-                key: _formKey,
                 child: Column(
                   children: [
                     CustomTextField(
