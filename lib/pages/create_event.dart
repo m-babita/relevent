@@ -98,6 +98,7 @@ class _CreateEventState extends State<CreateEvent> {
                       category('Webinar'),
                     ],
                   ),
+                  SizedBox(height: 10),
                   Row(
                     children: [
                       category('Technical Event'),
@@ -132,10 +133,11 @@ class _CreateEventState extends State<CreateEvent> {
                       ),
                     ],
                   ),
+                  SizedBox(height: 10),
                   label('Location'),
                   SizedBox(height: 8),
                   location('Enter location'),
-                  SizedBox(height: 30),
+                  SizedBox(height: 25),
                   createEventButton(),
                   SizedBox(height: 30),
                 ],

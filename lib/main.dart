@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:relevent/pages/bottom_nav.dart';
 import 'package:relevent/pages/create_event.dart';
+import 'package:relevent/pages/feedback_dialog.dart';
 import 'package:relevent/pages/home_page.dart';
 import 'package:relevent/pages/profile_page.dart';
 import 'package:relevent/pages/reset_password.dart';
@@ -13,7 +14,7 @@ import 'package:relevent/pages/signup_page.dart';
 import 'package:relevent/pages/onboard_page.dart';
 import 'package:relevent/services/firebase_auth_methods.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
+import 'package:relevent/firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -68,8 +69,9 @@ class MyApp extends StatelessWidget {
             Onboard.routeName: (context) => Onboard(),
             CreateEvent.routeName: (context) => CreateEvent(),
             Profile.routeName: (context) => Profile(),
-            BottomNav.routeName: (context) => BottomNav(),
             MyHomePage.routeName: (context) => MyHomePage(),
+            BottomNav.routeName: (context) => BottomNav(),
+            GiveFeedback.routeName: (context) => GiveFeedback(),
           },
         ),
       ),

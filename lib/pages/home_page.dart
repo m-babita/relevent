@@ -78,28 +78,23 @@ class _MyHomePageState extends State<MyHomePage> {
             ],
           ),
           actions: [
-            InkWell(
-              onTap: () {
-                Navigator.pushNamed(context, Profile.routeName);
-              },
-              child: Row(
-                children: [
-                  CircleAvatar(
-                    radius: 18,
-                    child: ClipOval(
-                      child: Image.asset(
-                        'images/avatar.png',
-                        width: 100,
-                        height: 100,
-                        fit: BoxFit.cover,
-                      ),
+            Row(
+              children: [
+                CircleAvatar(
+                  radius: 18,
+                  child: ClipOval(
+                    child: Image.asset(
+                      'images/avatar.png',
+                      width: 100,
+                      height: 100,
+                      fit: BoxFit.cover,
                     ),
                   ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                ],
-              ),
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+              ],
             ),
           ]),
       body: !isloggedin
@@ -116,6 +111,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       height: 20,
                     ),
                     Container(
+                      width: 900,
                       padding: EdgeInsets.symmetric(horizontal: 20),
                       child: CustomTextField(
                         controller: searchController,

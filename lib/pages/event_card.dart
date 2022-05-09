@@ -14,7 +14,7 @@ class EventCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width,
+      width: 900,
       child: Row(
         children: [
           Expanded(
@@ -32,7 +32,6 @@ class EventCard extends StatelessWidget {
                     height: 15,
                   ),
                   Container(
-                    width: MediaQuery.of(context).size.width * 0.8,
                     padding: const EdgeInsets.all(15.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -49,8 +48,11 @@ class EventCard extends StatelessWidget {
                           date,
                           style: TextStyle(fontSize: 18),
                         ),
-                        Text(
-                          description,
+                        Container(
+                          width: 300,
+                          child: Text(
+                            description,
+                          ),
                         ),
                       ],
                     ),

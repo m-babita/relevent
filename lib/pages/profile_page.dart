@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:relevent/pages/feedback_dialog.dart';
 import 'package:relevent/pages/login_page.dart';
 import 'package:relevent/pages/onboard_page.dart';
 
@@ -44,11 +45,15 @@ class _ProfileState extends State<Profile> {
     });
   }
 
+  feedback() {
+    GiveFeedback();
+  }
+
   @override
   void initState() {
     super.initState();
-    this.checkAuthentification();
-    this.getUser();
+    checkAuthentification();
+    getUser();
   }
 
   @override
@@ -168,6 +173,40 @@ class _ProfileState extends State<Profile> {
                             ),
                             SizedBox(
                               height: 10,
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  "Give feedback:",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.teal,
+                                    fontSize: 20,
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                ElevatedButton(
+                                  onPressed: () {
+                                    showDialog(
+                                        context: context,
+                                        builder: (context) => GiveFeedback());
+                                  },
+                                  style: ButtonStyle(
+                                    padding: MaterialStateProperty.resolveWith<
+                                        EdgeInsetsGeometry>(
+                                      (Set<MaterialState> states) {
+                                        return EdgeInsets.all(8);
+                                      },
+                                    ),
+                                  ),
+                                  child: Text(
+                                    'Feedback',
+                                    style: TextStyle(fontSize: 16),
+                                  ),
+                                ),
+                              ],
                             ),
                             Row(children: [
                               Text(

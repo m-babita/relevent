@@ -11,7 +11,6 @@ class EventDetails extends StatefulWidget {
 }
 
 class _EventDetailsState extends State<EventDetails> {
-  
   String type = "", date = "";
   TextEditingController? _titleController;
   TextEditingController? _descriptionController;
@@ -30,7 +29,6 @@ class _EventDetailsState extends State<EventDetails> {
     date = widget.document['date'];
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,7 +40,7 @@ class _EventDetailsState extends State<EventDetails> {
             color: Colors.teal[50],
           ),
           height: MediaQuery.of(context).size.height * 0.9,
-          width: MediaQuery.of(context).size.width * 0.9,
+          width: 800,
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -177,7 +175,7 @@ class _EventDetailsState extends State<EventDetails> {
 
 //location
   Widget location(String titleText) => Container(
-        width: MediaQuery.of(context).size.width * 0.6,
+        width: 300,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(25), color: Colors.teal[100]),
         child: TextFormField(
