@@ -5,7 +5,6 @@ import 'package:relevent/pages/create_event.dart';
 import 'package:relevent/pages/event_card.dart';
 import 'package:relevent/pages/event_details.dart';
 import 'package:relevent/pages/onboard_page.dart';
-import 'package:relevent/pages/profile_page.dart';
 import 'package:relevent/utils/extensions.dart';
 import 'package:relevent/widgets/custom_textfield.dart';
 

@@ -58,7 +58,7 @@ class _GiveFeedbackState extends State<GiveFeedback> {
                   SizedBox(height: 10),
                   feedbackMessage('Describe your experience here'),
                   SizedBox(height: 20),
-                  FeedbackButton(),
+                  feedbackButton(),
                 ],
               ),
             )
@@ -69,8 +69,7 @@ class _GiveFeedbackState extends State<GiveFeedback> {
   }
 
 //submit button
-  Widget FeedbackButton() {
-    return Container(
+  Widget feedbackButton() => Container(
         width: MediaQuery.of(context).size.width,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -85,7 +84,6 @@ class _GiveFeedbackState extends State<GiveFeedback> {
                 child: Text('Submit'))
           ],
         ));
-  }
 
 //feedbackMessage
   Widget feedbackMessage(String titleText) => Container(
