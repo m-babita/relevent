@@ -30,7 +30,7 @@ class FirebaseAuthMethods {
       if (user != null) {
         await _auth.currentUser!.updateDisplayName(name);
       }
-      ;
+      
     } on FirebaseAuthException catch (e) {
       showSnackBar(context, e.message!);
     }
@@ -49,7 +49,6 @@ class FirebaseAuthMethods {
         await sendEmailVerification(context).then((value) =>
             Navigator.pushReplacementNamed(context, BottomNav.routeName));
       }
-      ;
     } on FirebaseAuthException catch (e) {
       showSnackBar(context, e.message!);
     }

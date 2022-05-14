@@ -24,6 +24,7 @@ class _GiveFeedbackState extends State<GiveFeedback> {
   Widget build(BuildContext context) {
     return AlertDialog(
         content: Container(
+      width: 800,
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -70,20 +71,20 @@ class _GiveFeedbackState extends State<GiveFeedback> {
 
 //submit button
   Widget feedbackButton() => Container(
-        width: MediaQuery.of(context).size.width,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            ElevatedButton(
-                onPressed: () {
-                  FirebaseFirestore.instance
-                      .collection('FeedbackMessage')
-                      .add({"message": _feedbackController.text});
-                  Navigator.pop(context);
-                },
-                child: Text('Submit'))
-          ],
-        ));
+      width: MediaQuery.of(context).size.width,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          ElevatedButton(
+              onPressed: () {
+                FirebaseFirestore.instance
+                    .collection('FeedbackMessage')
+                    .add({"message": _feedbackController.text});
+                Navigator.pop(context);
+              },
+              child: Text('Submit'))
+        ],
+      ));
 
 //feedbackMessage
   Widget feedbackMessage(String titleText) => Container(
