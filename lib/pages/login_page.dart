@@ -57,50 +57,53 @@ class _LoginState extends State<Login> {
             SizedBox(height: h * 0.01),
             Text('Please login to continue using our app'),
             SizedBox(height: h * 0.02),
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 25),
-              width: w,
-              child: Form(
-                child: Column(
-                  children: [
-                    CustomTextField(
-                      controller: emailController,
-                      hintText: 'Enter your email',
-                      labelText: 'Email',
-                    ),
-                    SizedBox(height: 20),
-                    PasswordTextField(
-                      controller: passwordController,
-                      hintText: 'Enter your password',
-                      labelText: 'Password',
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Container(),
+            Center(
+              child: Container(
+                margin: const EdgeInsets.symmetric(horizontal: 25),
+                width: 700,
+                child: Form(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CustomTextField(
+                        controller: emailController,
+                        hintText: 'Enter your email',
+                        labelText: 'Email',
+                      ),
+                      SizedBox(height: 20),
+                      PasswordTextField(
+                        controller: passwordController,
+                        hintText: 'Enter your password',
+                        labelText: 'Password',
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Container(),
+                          ),
+                          TextButton(
+                            child: Text("Forgot Password?"),
+                            onPressed: () {
+                              Navigator.pushNamed(
+                                  context, ResetPassword.routeName);
+                            },
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 20),
+                      ElevatedButton(
+                        onPressed: loginUser,
+                        style: ButtonStyle(
+                          minimumSize: MaterialStateProperty.all(
+                            Size(w / 2.5, 50),
+                          ),
                         ),
-                        TextButton(
-                          child: Text("Forgot Password?"),
-                          onPressed: () {
-                            Navigator.pushNamed(
-                                context, ResetPassword.routeName);
-                          },
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 20),
-                    ElevatedButton(
-                      onPressed: loginUser,
-                      style: ButtonStyle(
-                        minimumSize: MaterialStateProperty.all(
-                          Size(w / 2.5, 50),
+                        child: const Text(
+                          "Login",
                         ),
                       ),
-                      child: const Text(
-                        "Login",
-                      ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),

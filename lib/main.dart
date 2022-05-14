@@ -48,7 +48,7 @@ class MyApp extends StatelessWidget {
               elevatedButtonTheme: ElevatedButtonThemeData(
                   style: TextButton.styleFrom(
                       padding:
-                          EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+                          EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                       shadowColor: Colors.teal,
                       elevation: 5,
                       shape: RoundedRectangleBorder(

@@ -93,8 +93,7 @@ class _ProfileState extends State<Profile> {
                         child: ClipOval(
                           child: Image.asset(
                             'images/avatar.png',
-                            width: MediaQuery.of(context).size.height * 0.23,
-                            height: MediaQuery.of(context).size.height * 0.23,
+                            width: 185,
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -124,110 +123,113 @@ class _ProfileState extends State<Profile> {
                       SizedBox(
                         height: 30,
                       ),
-                      Container(
-                        padding: EdgeInsets.symmetric(horizontal: 30),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Hello,",
-                              style: TextStyle(
-                                  color: Colors.teal,
-                                  fontSize: 28,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            Text(
-                              "${user!.displayName}",
-                              style: TextStyle(
-                                  color: Colors.teal,
-                                  fontSize: 28,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            SizedBox(
-                              height: 30,
-                            ),
-                            Text(
-                              'Email:',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
-                                  color: Colors.teal),
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Row(
-                              children: [
-                                Icon(Icons.mail, color: Colors.teal),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Text(
-                                  "${user!.email}",
-                                  style: TextStyle(
-                                    color: Colors.teal,
-                                    fontSize: 20,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Row(
-                              children: [
-                                Text(
-                                  "Give feedback:",
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.teal,
-                                    fontSize: 20,
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                ElevatedButton(
-                                  onPressed: () {
-                                    showDialog(
-                                        context: context,
-                                        builder: (context) => GiveFeedback());
-                                  },
-                                  style: ButtonStyle(
-                                    padding: MaterialStateProperty.resolveWith<
-                                        EdgeInsetsGeometry>(
-                                      (Set<MaterialState> states) {
-                                        return EdgeInsets.all(8);
-                                      },
-                                    ),
-                                  ),
-                                  child: Text(
-                                    'Feedback',
-                                    style: TextStyle(fontSize: 16),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Row(children: [
+                      Center(
+                        child: Container(
+                          width: 700,
+                          padding: EdgeInsets.symmetric(horizontal: 30),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
                               Text(
-                                'Are you organizer?:',
+                                "Hello,",
+                                style: TextStyle(
+                                    color: Colors.teal,
+                                    fontSize: 28,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              Text(
+                                "${user!.displayName}",
+                                style: TextStyle(
+                                    color: Colors.teal,
+                                    fontSize: 28,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              SizedBox(
+                                height: 30,
+                              ),
+                              Text(
+                                'Email:',
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 20,
                                     color: Colors.teal),
                               ),
-                              Switch(
-                                value: isSwitched,
-                                onChanged: (value) {
-                                  setState(() {
-                                    isSwitched = value;
-                                  });
-                                },
-                                activeTrackColor: Colors.teal[100],
-                                activeColor: Colors.teal,
+                              SizedBox(
+                                height: 10,
                               ),
-                            ]),
-                          ],
+                              Row(
+                                children: [
+                                  Icon(Icons.mail, color: Colors.teal),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Text(
+                                    "${user!.email}",
+                                    style: TextStyle(
+                                      color: Colors.teal,
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    "Give feedback:",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.teal,
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      showDialog(
+                                          context: context,
+                                          builder: (context) => GiveFeedback());
+                                    },
+                                    style: ButtonStyle(
+                                      padding: MaterialStateProperty
+                                          .resolveWith<EdgeInsetsGeometry>(
+                                        (Set<MaterialState> states) {
+                                          return EdgeInsets.all(8);
+                                        },
+                                      ),
+                                    ),
+                                    child: Text(
+                                      'Feedback',
+                                      style: TextStyle(fontSize: 16),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Row(children: [
+                                Text(
+                                  'Are you organizer?:',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20,
+                                      color: Colors.teal),
+                                ),
+                                Switch(
+                                  value: isSwitched,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      isSwitched = value;
+                                    });
+                                  },
+                                  activeTrackColor: Colors.teal[100],
+                                  activeColor: Colors.teal,
+                                ),
+                              ]),
+                            ],
+                          ),
                         ),
                       ),
                       SizedBox(

@@ -14,13 +14,13 @@ class EventCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 900,
+      width: 700,
       child: Row(
         children: [
           Expanded(
               child: Container(
             padding: EdgeInsets.symmetric(horizontal: 20),
-            height: MediaQuery.of(context).size.height * 0.2,
+            height: 165,
             child: Card(
               elevation: 5,
               shape: RoundedRectangleBorder(
