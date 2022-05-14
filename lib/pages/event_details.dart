@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:relevent/utils/show_snackbar.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class EventDetails extends StatefulWidget {
   static String routeName = '/eventDetails';
@@ -11,7 +13,7 @@ class EventDetails extends StatefulWidget {
 }
 
 class _EventDetailsState extends State<EventDetails> {
-  String type = "", date = "";
+  String type = "", date = "", link = "";
   TextEditingController? _titleController;
   TextEditingController? _descriptionController;
   TextEditingController? _locationController;
@@ -27,6 +29,15 @@ class _EventDetailsState extends State<EventDetails> {
     _locationController = TextEditingController(text: location);
     type = widget.document['type'];
     date = widget.document['date'];
+    link = widget.document['link'] ?? "https://forms.gle/BPyKjhisyyE3cJu96";
+  }
+
+  launchURL() async {
+    if (await canLaunchUrlString(link)) {
+      await launchUrlString(link, mode: LaunchMode.externalApplication);
+    } else {
+      showSnackBar(context, 'Could not launch');
+    }
   }
 
   @override
@@ -83,7 +94,9 @@ class _EventDetailsState extends State<EventDetails> {
                       SizedBox(height: 10),
                       label('Description :'),
                       SizedBox(height: 10),
-                      description('Enter details about your event'),
+                      description('Details about event'),
+                      SizedBox(height: 10),
+                      registerButton(),
                       SizedBox(height: 10),
                       label('Date :'),
                       SizedBox(height: 10),
@@ -101,7 +114,7 @@ class _EventDetailsState extends State<EventDetails> {
                           size: 33,
                         ),
                         SizedBox(width: 2),
-                        location('Enter location'),
+                        location('Location'),
                       ]),
                       SizedBox(height: 30),
                     ],
@@ -113,6 +126,20 @@ class _EventDetailsState extends State<EventDetails> {
         ),
       ),
     );
+  }
+
+  Widget registerButton() {
+    return SizedBox(
+        width: MediaQuery.of(context).size.width,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ElevatedButton(
+              onPressed: () => launchURL(),
+              child: Text('Register Now'),
+            ),
+          ],
+        ));
   }
 
 //description

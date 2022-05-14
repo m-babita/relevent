@@ -64,7 +64,7 @@ class FirebaseAuthMethods {
     }
   }
 
-//email reset
+//password reset
   Future<void> resetPassword({
     required String email,
     required BuildContext context,

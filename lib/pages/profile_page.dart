@@ -136,18 +136,18 @@ class _ProfileState extends State<Profile> {
                                   "Hello,",
                                   style: TextStyle(
                                       color: Colors.teal,
-                                      fontSize: 28,
+                                      fontSize: 24,
                                       fontWeight: FontWeight.bold),
                                 ),
                                 Text(
                                   "${user!.displayName}",
                                   style: TextStyle(
                                       color: Colors.teal,
-                                      fontSize: 28,
+                                      fontSize: 24,
                                       fontWeight: FontWeight.bold),
                                 ),
                                 SizedBox(
-                                  height: 30,
+                                  height: 20,
                                 ),
                                 Text(
                                   'Email:',

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -11,7 +12,21 @@ class GiveFeedback extends StatefulWidget {
 }
 
 class _GiveFeedbackState extends State<GiveFeedback> {
+  User? user;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   final TextEditingController _feedbackController = TextEditingController();
+
+  getUser() async {
+    User? firebaseUser = await _auth.currentUser;
+    await firebaseUser?.reload();
+    firebaseUser = _auth.currentUser;
+
+    if (firebaseUser != null) {
+      setState(() {
+        this.user = firebaseUser;
+      });
+    }
+  }
 
   @override
   void dispose() {
@@ -21,8 +36,15 @@ class _GiveFeedbackState extends State<GiveFeedback> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    getUser();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return AlertDialog(
+        // ignore: sized_box_for_whitespace
         content: Container(
       width: 700,
       child: SingleChildScrollView(
@@ -51,6 +73,10 @@ class _GiveFeedbackState extends State<GiveFeedback> {
                         color: Colors.teal,
                         fontWeight: FontWeight.bold),
                   ),
+                  SizedBox(height: 10),
+                  Text(
+                    "${user?.displayName}",
+                  ), 
                   SizedBox(height: 8),
                   Text(
                     "Do you have a suggestion? or found some bug let us know! It will help us improve Rel'Event.",
@@ -77,9 +103,11 @@ class _GiveFeedbackState extends State<GiveFeedback> {
         children: [
           ElevatedButton(
               onPressed: () {
-                FirebaseFirestore.instance
-                    .collection('FeedbackMessage')
-                    .add({"message": _feedbackController.text});
+                FirebaseFirestore.instance.collection('FeedbackMessage').add({
+                  "message": _feedbackController.text,
+                  "name": user?.displayName,
+                  "email": user?.email,
+                });
                 Navigator.pop(context);
               },
               child: Text('Submit'))

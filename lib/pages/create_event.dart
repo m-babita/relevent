@@ -15,13 +15,14 @@ class _CreateEventState extends State<CreateEvent> {
   String type = "";
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
+  final TextEditingController _registerController = TextEditingController();
   final TextEditingController _locationController = TextEditingController();
 
   pickDate() async {
     final result = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
-      firstDate: DateTime(2019),
+      firstDate: DateTime(2010),
       lastDate: DateTime(2050),
     );
     if (result != null) {
@@ -89,6 +90,7 @@ class _CreateEventState extends State<CreateEvent> {
                     title('Enter Event Title'),
                     SizedBox(height: 10),
                     label('Event Type'),
+                    SizedBox(height: 8),
                     Row(
                       children: [
                         category('Seminar'),
@@ -114,6 +116,10 @@ class _CreateEventState extends State<CreateEvent> {
                     label('Description'),
                     SizedBox(height: 8),
                     description('Enter details about your event'),
+                    SizedBox(height: 10),
+                    label('Register Link'),
+                    SizedBox(height: 8),
+                    register('Enter registration link'),
                     SizedBox(height: 10),
                     label('Date'),
                     SizedBox(height: 3),
@@ -165,6 +171,7 @@ class _CreateEventState extends State<CreateEvent> {
                     "title": _titleController.text,
                     "type": type,
                     "description": _descriptionController.text,
+                    "link": _registerController,
                     "date": _dateString(),
                     "location": _locationController.text,
                   });
@@ -238,6 +245,27 @@ class _CreateEventState extends State<CreateEvent> {
         ),
       );
 
+//register
+  Widget register(String titleText) => Container(
+        height: 55,
+        width: MediaQuery.of(context).size.width,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(25), color: Colors.teal[100]),
+        child: TextFormField(
+          controller: _registerController,
+          style: TextStyle(fontSize: 17),
+          decoration: InputDecoration(
+              hintText: titleText,
+              border: InputBorder.none,
+              focusedBorder: InputBorder.none,
+              enabledBorder: InputBorder.none,
+              errorBorder: InputBorder.none,
+              disabledBorder: InputBorder.none,
+              contentPadding:
+                  EdgeInsets.only(left: 15, bottom: 11, top: 11, right: 15),
+              hintStyle: TextStyle(fontSize: 17)),
+        ),
+      );
 //location
   Widget location(String titleText) => Container(
         height: 55,

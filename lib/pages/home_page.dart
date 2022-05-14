@@ -146,10 +146,10 @@ class _MyHomePageState extends State<MyHomePage> {
                                                 )));
                                   },
                                   child: EventCard(
-                                      title: document['title'] == ""
+                                      title: document['title'] == ''
                                           ? "Event Title"
                                           : document['title'],
-                                      type: document['type'] == ""
+                                      type: document['type'] == ''
                                           ? "Others"
                                           : document['type'],
                                       date: document['date'] ==
