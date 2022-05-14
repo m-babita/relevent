@@ -131,7 +131,7 @@ class _LoginState extends State<Login> {
                 onPressed: googleSignin,
               )
             ]),
-            SizedBox(height: h * 0.02),
+            SizedBox(height: 50),
           ],
         ),
       ),

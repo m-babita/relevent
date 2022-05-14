@@ -31,8 +31,8 @@ class _SplashState extends State<Splash> {
       body: Center(
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           SizedBox(
-            height: 100,
-            width: 100,
+            height: 50,
+            width: 50,
             child: Image.asset("images/logo.png"),
           ),
           SizedBox(
@@ -41,7 +41,7 @@ class _SplashState extends State<Splash> {
           RichText(
             text: const TextSpan(
                 text: 'Rel',
-                style: TextStyle(color: Colors.black, fontSize: 24),
+                style: TextStyle(color: Colors.black, fontSize: 20),
                 children: [
                   TextSpan(
                       text: '\'Event', style: TextStyle(color: Colors.teal))

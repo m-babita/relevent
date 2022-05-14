@@ -24,7 +24,7 @@ class _GiveFeedbackState extends State<GiveFeedback> {
   Widget build(BuildContext context) {
     return AlertDialog(
         content: Container(
-      width: 800,
+      width: 700,
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -34,7 +34,7 @@ class _GiveFeedbackState extends State<GiveFeedback> {
                 Navigator.pop(context);
               },
               icon: Icon(
-                CupertinoIcons.arrow_left,
+                CupertinoIcons.clear_thick,
                 color: Colors.teal,
                 size: 28,
               ),

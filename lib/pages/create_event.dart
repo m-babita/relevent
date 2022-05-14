@@ -42,111 +42,114 @@ class _CreateEventState extends State<CreateEvent> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(
-      height: MediaQuery.of(context).size.height,
-      width: MediaQuery.of(context).size.width,
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              height: 20,
-            ),
-            IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: Icon(
-                CupertinoIcons.arrow_left,
-                color: Colors.teal,
-                size: 28,
+      body: Center(
+          child: Container(
+        height: MediaQuery.of(context).size.height,
+        width: 500,
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: 20,
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Create a",
-                    style: TextStyle(
-                        fontSize: 30,
-                        color: Colors.teal,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  Text(
-                    "New Event ",
-                    style: TextStyle(
-                        fontSize: 30,
-                        color: Colors.teal,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(height: 10),
-                  label('Event Title'),
-                  SizedBox(height: 8),
-                  title('Enter Event Title'),
-                  SizedBox(height: 10),
-                  label('Event Type'),
-                  Row(
-                    children: [
-                      category('Seminar'),
-                      SizedBox(width: 8),
-                      category('Hackathon'),
-                      SizedBox(width: 8),
-                      category('Campaign'),
-                      SizedBox(width: 8),
-                      category('Webinar'),
-                    ],
-                  ),
-                  SizedBox(height: 10),
-                  Row(
-                    children: [
-                      category('Technical Event'),
-                      SizedBox(width: 8),
-                      category('Fest'),
-                      SizedBox(width: 8),
-                      category('Other'),
-                    ],
-                  ),
-                  SizedBox(height: 10),
-                  label('Description'),
-                  SizedBox(height: 8),
-                  description('Enter details about your event'),
-                  SizedBox(height: 10),
-                  label('Date'),
-                  SizedBox(height: 3),
-                  Row(
-                    children: [
-                      ElevatedButton.icon(
-                        onPressed: pickDate,
-                        icon: Icon(Icons.calendar_today_rounded),
-                        label: Text('Choose a Date'),
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.teal,
+              IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: Icon(
+                  CupertinoIcons.arrow_left,
+                  color: Colors.teal,
+                  size: 28,
+                ),
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Create a",
+                      style: TextStyle(
+                          fontSize: 30,
+                          color: Colors.teal,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      "New Event ",
+                      style: TextStyle(
+                          fontSize: 30,
+                          color: Colors.teal,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(height: 10),
+                    label('Event Title'),
+                    SizedBox(height: 8),
+                    title('Enter Event Title'),
+                    SizedBox(height: 10),
+                    label('Event Type'),
+                    Row(
+                      children: [
+                        category('Seminar'),
+                        SizedBox(width: 8),
+                        category('Hackathon'),
+                        SizedBox(width: 8),
+                        category('Campaign'),
+                        SizedBox(width: 8),
+                        category('Webinar'),
+                      ],
+                    ),
+                    SizedBox(height: 10),
+                    Row(
+                      children: [
+                        category('Technical Event'),
+                        SizedBox(width: 8),
+                        category('Fest'),
+                        SizedBox(width: 8),
+                        category('Other'),
+                      ],
+                    ),
+                    SizedBox(height: 10),
+                    label('Description'),
+                    SizedBox(height: 8),
+                    description('Enter details about your event'),
+                    SizedBox(height: 10),
+                    label('Date'),
+                    SizedBox(height: 3),
+                    Row(
+                      children: [
+                        ElevatedButton.icon(
+                          onPressed: pickDate,
+                          icon: Icon(Icons.calendar_today_rounded),
+                          label: Text('Choose a Date'),
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.teal,
+                          ),
                         ),
-                      ),
-                      SizedBox(width: 10),
-                      Text(
-                        _dateString(),
-                        style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.bold),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 10),
-                  label('Location'),
-                  SizedBox(height: 8),
-                  location('Enter location'),
-                  SizedBox(height: 25),
-                  createEventButton(),
-                  SizedBox(height: 30),
-                ],
-              ),
-            )
-          ],
+                        SizedBox(width: 10),
+                        Text(
+                          _dateString(),
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 10),
+                    label('Location'),
+                    SizedBox(height: 8),
+                    location('Enter location'),
+                    SizedBox(height: 25),
+                    createEventButton(),
+                    SizedBox(height: 30),
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
-      ),
-    ));
+      )),
+    );
   }
 
 //submit button

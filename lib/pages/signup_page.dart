@@ -125,6 +125,7 @@ class _SignupState extends State<Signup> {
                 onPressed: googleSignin,
               )
             ]),
+            SizedBox(height: 50),
           ],
         ),
       ),

@@ -14,7 +14,7 @@ class EventCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 700,
+      width: 900,
       child: Row(
         children: [
           Expanded(
@@ -38,15 +38,16 @@ class EventCard extends StatelessWidget {
                       children: [
                         Text(
                           title,
-                          style: TextStyle(fontSize: 20),
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.w600),
                         ),
                         Text(
                           type,
-                          style: TextStyle(fontSize: 18),
+                          style: TextStyle(fontSize: 16),
                         ),
                         Text(
                           date,
-                          style: TextStyle(fontSize: 18),
+                          style: TextStyle(fontSize: 16),
                         ),
                         Container(
                           width: 300,

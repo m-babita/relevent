@@ -62,12 +62,12 @@ class _BottomNavState extends State<BottomNav> {
           data: NavigationBarThemeData(
               indicatorColor: Colors.teal[100],
               labelTextStyle: MaterialStateProperty.all(TextStyle(
-                fontSize: 14,
+                fontSize: 12,
                 fontWeight: FontWeight.w600,
-                color: Colors.teal[800],
+                color: Colors.teal,
               ))),
           child: NavigationBar(
-            height: 60,
+            height: 55,
             backgroundColor: Colors.teal[50],
             selectedIndex: index,
             onDestinationSelected: setIndex,
@@ -78,12 +78,12 @@ class _BottomNavState extends State<BottomNav> {
                 label: 'Home',
                 icon: Icon(
                   Icons.home_outlined,
-                  size: 28,
+                  size: 20,
                   color: Colors.teal[800],
                 ),
                 selectedIcon: Icon(
                   Icons.home_rounded,
-                  size: 28,
+                  size: 20,
                   color: Colors.teal[800],
                 ),
               ),
@@ -91,12 +91,12 @@ class _BottomNavState extends State<BottomNav> {
                 label: 'Profile',
                 icon: Icon(
                   Icons.person_outline_rounded,
-                  size: 28,
+                  size: 20,
                   color: Colors.teal[800],
                 ),
                 selectedIcon: Icon(
                   Icons.person_rounded,
-                  size: 28,
+                  size: 20,
                   color: Colors.teal[800],
                 ),
               ),

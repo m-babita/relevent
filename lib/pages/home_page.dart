@@ -62,7 +62,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          toolbarHeight: 70,
+          toolbarHeight: 50,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
               bottomLeft: Radius.circular(50),
@@ -104,7 +104,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 if (!snapshot.hasData) {
                   return Center(child: CircularProgressIndicator());
                 }
-                return SingleChildScrollView(
+                return Container(
+                    child: SingleChildScrollView(
                   child: Column(children: [
                     SizedBox(
                       height: 20,
@@ -130,7 +131,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               snapshot.data!.docs[index].data()
                                   as Map<String, dynamic>;
                           return Container(
-                              padding: EdgeInsets.symmetric(horizontal: 10),
+                              padding: EdgeInsets.symmetric(horizontal: 5),
                               child: Column(children: [
                                 SizedBox(
                                   height: 10,
@@ -170,7 +171,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       height: 20,
                     ),
                   ]),
-                );
+                ));
               })),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.teal[400],
