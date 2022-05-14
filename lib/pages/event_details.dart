@@ -34,7 +34,8 @@ class _EventDetailsState extends State<EventDetails> {
 
   launchURL() async {
     if (await canLaunchUrlString(link)) {
-      await launchUrlString(link, mode: LaunchMode.externalApplication);
+      await launchUrlString(link,
+          mode: LaunchMode.externalApplication, webOnlyWindowName: link);
     } else {
       showSnackBar(context, 'Could not launch');
     }
