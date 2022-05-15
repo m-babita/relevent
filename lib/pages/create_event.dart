@@ -171,11 +171,11 @@ class _CreateEventState extends State<CreateEvent> {
                     "title": _titleController.text,
                     "type": type,
                     "description": _descriptionController.text,
-                    "link": _registerController,
+                    "link": _registerController.text,
                     "date": _dateString(),
                     "location": _locationController.text,
-                  });
-                  Navigator.pop(context);
+                  }).then((value) =>
+                      {Navigator.pop(context), print('event created')});
                 },
                 child: Text('Create Event'))
           ],

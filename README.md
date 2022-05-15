@@ -1,3 +1,6 @@
-# relevent
+## Rel'Event
 
-Minor Project based on Flutter and Firebase
+Project based on Flutter and Firebase
+
+Application for exploring events and registering in it.
+

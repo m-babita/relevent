@@ -22,15 +22,16 @@ class FirebaseAuthMethods {
     required BuildContext context,
   }) async {
     try {
-      UserCredential user = await _auth.createUserWithEmailAndPassword(
+      UserCredential username = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
+      User? user = username.user;
+      user!.updateDisplayName(name);
       await sendEmailVerification(context).then((value) =>
           Navigator.pushReplacementNamed(context, BottomNav.routeName));
 
       if (user != null) {
         await _auth.currentUser!.updateDisplayName(name);
       }
-      
     } on FirebaseAuthException catch (e) {
       showSnackBar(context, e.message!);
     }
@@ -85,8 +86,7 @@ class FirebaseAuthMethods {
       if (kIsWeb) {
         GoogleAuthProvider googleProvider = GoogleAuthProvider();
 
-        googleProvider
-            .addScope('https://www.googleapis.com/auth/contacts.readonly');
+        googleProvider.addScope('https://www.googleapis.com/auth/gmail.labels');
 
         await _auth.signInWithPopup(googleProvider);
       } else {
@@ -104,8 +104,8 @@ class FirebaseAuthMethods {
           UserCredential userCredential =
               await _auth.signInWithCredential(credential);
         }
+        Navigator.pushReplacementNamed(context, BottomNav.routeName);
       }
-      Navigator.pushReplacementNamed(context, BottomNav.routeName);
     } on FirebaseAuthException catch (e) {
       showSnackBar(context, e.message!); // Displaying the error message
     }

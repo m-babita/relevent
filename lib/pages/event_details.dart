@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:relevent/utils/show_snackbar.dart';
 import 'package:url_launcher/url_launcher_string.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class EventDetails extends StatefulWidget {
   static String routeName = '/eventDetails';
@@ -34,8 +35,15 @@ class _EventDetailsState extends State<EventDetails> {
 
   launchURL() async {
     if (await canLaunchUrlString(link)) {
-      await launchUrlString(link,
-          mode: LaunchMode.externalApplication, webOnlyWindowName: link);
+      await launchUrlString(
+        link,
+        mode: LaunchMode.externalApplication,
+        webViewConfiguration: WebViewConfiguration(
+          enableJavaScript: true,
+          enableDomStorage: true,
+        ),
+        webOnlyWindowName: link,
+      );
     } else {
       showSnackBar(context, 'Could not launch');
     }
