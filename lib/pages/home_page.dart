@@ -22,6 +22,9 @@ class _MyHomePageState extends State<MyHomePage> {
   final TextEditingController searchController = TextEditingController();
   bool isloggedin = false;
 
+  CollectionReference usersCollection =
+      FirebaseFirestore.instance.collection('Users');
+
   //firestore
   final Stream<QuerySnapshot> _stream =
       FirebaseFirestore.instance.collection("EventDetails").snapshots();
@@ -51,11 +54,19 @@ class _MyHomePageState extends State<MyHomePage> {
     Navigator.pushNamed(context, CreateEvent.routeName);
   }
 
+  Stream<DocumentSnapshot<Object?>> _fetch() {
+    User? firebaseUser = _auth.currentUser;
+    if (firebaseUser != null) {
+      return usersCollection.doc(firebaseUser.uid).snapshots();
+    }
+    throw (Error);
+  }
+
   @override
   void initState() {
     super.initState();
-    this.checkAuthentification();
-    this.getUser();
+    checkAuthentification();
+    getUser();
   }
 
   @override
@@ -98,86 +109,102 @@ class _MyHomePageState extends State<MyHomePage> {
           ]),
       body: !isloggedin
           ? Center(child: CircularProgressIndicator())
-          : StreamBuilder<QuerySnapshot>(
-              stream: _stream,
-              builder: ((context, snapshot) {
-                if (!snapshot.hasData) {
-                  return Center(child: CircularProgressIndicator());
-                }
-                return Container(
-                    child: SingleChildScrollView(
-                  child: Column(children: [
-                    SizedBox(
-                      height: 20,
+          : Container(
+              child: SingleChildScrollView(
+                child: Column(children: [
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                    width: 900,
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    child: CustomTextField(
+                      controller: searchController,
+                      hintText: '',
+                      labelText: '',
                     ),
-                    Container(
-                      width: 900,
-                      padding: EdgeInsets.symmetric(horizontal: 20),
-                      child: CustomTextField(
-                        controller: searchController,
-                        hintText: '',
-                        labelText: '',
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    ListView.builder(
-                        physics: NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        itemCount: snapshot.data!.docs.length,
-                        itemBuilder: (context, index) {
-                          Map<String, dynamic> document =
-                              snapshot.data!.docs[index].data()
-                                  as Map<String, dynamic>;
-                          return Container(
-                              padding: EdgeInsets.symmetric(horizontal: 5),
-                              child: Column(children: [
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                InkWell(
-                                  onTap: () {
-                                    Navigator.push(
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  StreamBuilder<QuerySnapshot>(
+                      stream: _stream,
+                      builder: ((context, snapshot) {
+                        if (!snapshot.hasData) {
+                          return Center(child: CircularProgressIndicator());
+                        }
+                        return Container(
+                            child: ListView.builder(
+                          physics: NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          itemCount: snapshot.data!.docs.length,
+                          itemBuilder: (context, index) {
+                            Map<String, dynamic> document =
+                                snapshot.data!.docs[index].data()
+                                    as Map<String, dynamic>;
+                            return Container(
+                                padding: EdgeInsets.symmetric(horizontal: 5),
+                                child: Column(children: [
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  InkWell(
+                                    onTap: () {
+                                      Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (builder) => EventDetails(
-                                                  document: document,
-                                                )));
-                                  },
-                                  child: EventCard(
-                                      title: document['title'] == ''
-                                          ? "Event Title"
-                                          : document['title'],
-                                      type: document['type'] == ''
-                                          ? "Others"
-                                          : document['type'],
-                                      date: document['date'] ==
-                                              "Select date Of Event"
-                                          ? "soon"
-                                          : document['date'],
-                                      description:
-                                          document['description'] == null
-                                              ? "description of event"
-                                              : truncateString(
-                                                  document['description'])),
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                )
-                              ]));
-                        }),
-                    SizedBox(
-                      height: 20,
-                    ),
-                  ]),
-                ));
-              })),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.teal[400],
-        elevation: 5,
-        onPressed: createEvent,
-        child: const Icon(Icons.add),
+                                          builder: (builder) => EventDetails(
+                                            document: document,
+                                            id: snapshot.data!.docs[index].id,
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                    child: EventCard(
+                                        title: document['title'] == ''
+                                            ? "Event Title"
+                                            : document['title'],
+                                        type: document['type'] == ''
+                                            ? "Others"
+                                            : document['type'],
+                                        date: document['date'] ==
+                                                "Select date Of Event"
+                                            ? "soon"
+                                            : document['date'],
+                                        description:
+                                            document['description'] == null
+                                                ? "description of event"
+                                                : truncateString(
+                                                    document['description'])),
+                                  ),
+                                  SizedBox(
+                                    height: 5,
+                                  )
+                                ]));
+                          },
+                        ));
+                      })),
+                  SizedBox(
+                    height: 20,
+                  ),
+                ]),
+              ),
+            ),
+      floatingActionButton: StreamBuilder<DocumentSnapshot>(
+        stream: _fetch(),
+        builder: ((context, snapshot) {
+          bool shouldShow =
+              snapshot.data?["role"] == 'participant' ? false : true;
+          return Opacity(
+            opacity: shouldShow ? 1 : 0,
+            child: FloatingActionButton(
+              backgroundColor: Colors.teal[400],
+              elevation: 5,
+              onPressed: shouldShow ? createEvent : () {},
+              child: const Icon(Icons.add),
+            ),
+          );
+        }),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }

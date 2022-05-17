@@ -45,8 +45,9 @@ class _CreateEventState extends State<CreateEvent> {
     return Scaffold(
       body: Center(
           child: Container(
+        alignment: Alignment(0.0, 0.0),
         height: MediaQuery.of(context).size.height,
-        width: 500,
+        width: 800,
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -175,7 +176,7 @@ class _CreateEventState extends State<CreateEvent> {
                     "date": _dateString(),
                     "location": _locationController.text,
                   }).then((value) =>
-                      {Navigator.pop(context), print('event created')});
+                      {Navigator.pop(context),});
                 },
                 child: Text('Create Event'))
           ],

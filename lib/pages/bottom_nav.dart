@@ -50,8 +50,8 @@ class _BottomNavState extends State<BottomNav> {
   @override
   void initState() {
     super.initState();
-    this.checkAuthentification();
-    this.getUser();
+    checkAuthentification();
+    getUser();
   }
 
   @override

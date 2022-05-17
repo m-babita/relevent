@@ -1,13 +1,15 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:relevent/utils/show_snackbar.dart';
 import 'package:url_launcher/url_launcher_string.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class EventDetails extends StatefulWidget {
   static String routeName = '/eventDetails';
-  const EventDetails({Key? key, required this.document}) : super(key: key);
+  const EventDetails({Key? key, required this.document, required this.id})
+      : super(key: key);
   final Map<String, dynamic> document;
+  final String id;
 
   @override
   State<EventDetails> createState() => _EventDetailsState();
@@ -18,6 +20,7 @@ class _EventDetailsState extends State<EventDetails> {
   TextEditingController? _titleController;
   TextEditingController? _descriptionController;
   TextEditingController? _locationController;
+  bool edit = false;
 
   @override
   void initState() {
@@ -65,16 +68,36 @@ class _EventDetailsState extends State<EventDetails> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                IconButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  icon: Icon(
-                    CupertinoIcons.clear,
-                    color: Colors.teal,
-                    size: 24,
-                  ),
-                ),
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      IconButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        icon: Icon(
+                          CupertinoIcons.clear,
+                          color: Colors.teal,
+                          size: 24,
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: () {
+                          FirebaseFirestore.instance
+                              .collection('EventDetails')
+                              .doc(widget.id)
+                              .delete()
+                              .then((value) => {
+                                    Navigator.pop(context),
+                                  });
+                        },
+                        icon: Icon(
+                          Icons.delete,
+                          color: Colors.teal[600],
+                          size: 24,
+                        ),
+                      ),
+                    ]),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 30),
                   child: Column(
@@ -156,6 +179,7 @@ class _EventDetailsState extends State<EventDetails> {
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(25), color: Colors.teal[100]),
         child: TextFormField(
+          enabled: edit,
           controller: _descriptionController,
           style: TextStyle(fontSize: 20),
           maxLines: null,
@@ -174,11 +198,13 @@ class _EventDetailsState extends State<EventDetails> {
 //event type
   Widget category(String eventType) {
     return InkWell(
-        onTap: () {
-          setState(() {
-            type = eventType;
-          });
-        },
+        onTap: edit
+            ? () {
+                setState(() {
+                  type = eventType;
+                });
+              }
+            : null,
         child: Chip(
             elevation: 5,
             backgroundColor: Colors.teal[400],
@@ -195,6 +221,7 @@ class _EventDetailsState extends State<EventDetails> {
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(25), color: Colors.teal[100]),
         child: TextFormField(
+          enabled: edit,
           controller: _titleController,
           style: TextStyle(fontSize: 20),
           decoration: InputDecoration(
@@ -216,6 +243,7 @@ class _EventDetailsState extends State<EventDetails> {
             borderRadius: BorderRadius.circular(25), color: Colors.teal[100]),
         child: TextFormField(
           controller: _locationController,
+          enabled: edit,
           style: TextStyle(fontSize: 20),
           decoration: InputDecoration(
             hintText: titleText,

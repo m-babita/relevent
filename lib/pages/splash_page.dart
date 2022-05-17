@@ -41,7 +41,7 @@ class _SplashState extends State<Splash> {
           RichText(
             text: const TextSpan(
                 text: 'Rel',
-                style: TextStyle(color: Colors.black, fontSize: 20),
+                style: TextStyle(color: Colors.black, fontSize: 18),
                 children: [
                   TextSpan(
                       text: '\'Event', style: TextStyle(color: Colors.teal))

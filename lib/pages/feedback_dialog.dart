@@ -17,7 +17,7 @@ class _GiveFeedbackState extends State<GiveFeedback> {
   final TextEditingController _feedbackController = TextEditingController();
 
   getUser() async {
-    User? firebaseUser = await _auth.currentUser;
+    User? firebaseUser = _auth.currentUser;
     await firebaseUser?.reload();
     firebaseUser = _auth.currentUser;
 

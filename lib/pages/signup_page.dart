@@ -20,6 +20,7 @@ class _SignupState extends State<Signup> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController nameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  bool organizer = false;
 
   googleSignin() async {
     context.read<FirebaseAuthMethods>().signInWithGoogle(context);
@@ -30,6 +31,7 @@ class _SignupState extends State<Signup> {
           name: nameController.text,
           email: emailController.text,
           password: passwordController.text,
+          role:organizer?'organizer':'participant',
           context: context,
         );
   }
@@ -52,7 +54,7 @@ class _SignupState extends State<Signup> {
             Container(
                 height: 60, width: 60, child: Image.asset("images/logo.png")),
             Container(
-              height: h * 0.3,
+              height: 250,
               child: Image.asset("images/signup.png"),
             ),
             const Text(
@@ -85,6 +87,26 @@ class _SignupState extends State<Signup> {
                       hintText: 'Enter your password',
                       labelText: 'Password',
                     ),
+                    SizedBox(height: 14),
+                    Row(children: [
+                      Text(
+                        'Are you an organizer?:',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                            color: Colors.teal),
+                      ),
+                      Switch(
+                        value: organizer,
+                        onChanged: (value) {
+                          setState(() {
+                            organizer = value;
+                          });
+                        },
+                        activeTrackColor: Colors.teal[100],
+                        activeColor: Colors.teal,
+                      ),
+                    ]),
                     SizedBox(height: 25),
                     ElevatedButton(
                       onPressed: signUpUser,
