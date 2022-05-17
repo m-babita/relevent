@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:relevent/utils/show_snackbar.dart';
@@ -16,11 +17,22 @@ class EventDetails extends StatefulWidget {
 }
 
 class _EventDetailsState extends State<EventDetails> {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   String type = "", date = "", link = "";
   TextEditingController? _titleController;
   TextEditingController? _descriptionController;
   TextEditingController? _locationController;
   bool edit = false;
+  CollectionReference usersCollection =
+      FirebaseFirestore.instance.collection('Users');
+
+  Stream<DocumentSnapshot<Object?>> _fetch() {
+    User? firebaseUser = _auth.currentUser;
+    if (firebaseUser != null) {
+      return usersCollection.doc(firebaseUser.uid).snapshots();
+    }
+    throw (Error);
+  }
 
   @override
   void initState() {
@@ -68,36 +80,45 @@ class _EventDetailsState extends State<EventDetails> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      IconButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        icon: Icon(
-                          CupertinoIcons.clear,
-                          color: Colors.teal,
-                          size: 24,
-                        ),
-                      ),
-                      IconButton(
-                        onPressed: () {
-                          FirebaseFirestore.instance
-                              .collection('EventDetails')
-                              .doc(widget.id)
-                              .delete()
-                              .then((value) => {
-                                    Navigator.pop(context),
-                                  });
-                        },
-                        icon: Icon(
-                          Icons.delete,
-                          color: Colors.teal[600],
-                          size: 24,
-                        ),
-                      ),
-                    ]),
+                StreamBuilder<DocumentSnapshot>(
+                    stream: _fetch(),
+                    builder: (((context, snapshot) => Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              IconButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                icon: Icon(
+                                  CupertinoIcons.clear,
+                                  color: Colors.teal,
+                                  size: 24,
+                                ),
+                              ),
+                              IconButton(
+                                onPressed: snapshot.data?["role"] == 'organizer'
+                                    ? () {
+                                        FirebaseFirestore.instance
+                                            .collection('EventDetails')
+                                            .doc(widget.id)
+                                            .delete()
+                                            .then((value) => {
+                                                  Navigator.pop(context),
+                                                });
+                                      }
+                                    : () {},
+                                icon: Opacity(
+                                  opacity: snapshot.data?["role"] == 'organizer'
+                                      ? 1
+                                      : 0,
+                                  child: Icon(
+                                    Icons.delete,
+                                    color: Colors.teal[600],
+                                    size: 24,
+                                  ),
+                                ),
+                              ),
+                            ])))),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 30),
                   child: Column(
@@ -168,7 +189,7 @@ class _EventDetailsState extends State<EventDetails> {
           children: [
             ElevatedButton(
               onPressed: () => launchURL(),
-              child: Text('Register Now'),
+              child: Text('Register'),
             ),
           ],
         ));

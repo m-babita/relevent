@@ -65,8 +65,8 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    checkAuthentification();
-    getUser();
+    this.checkAuthentification();
+    this.getUser();
   }
 
   @override

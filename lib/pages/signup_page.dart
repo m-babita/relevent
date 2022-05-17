@@ -31,7 +31,7 @@ class _SignupState extends State<Signup> {
           name: nameController.text,
           email: emailController.text,
           password: passwordController.text,
-          role:organizer?'organizer':'participant',
+          role: organizer ? 'organizer' : 'participant',
           context: context,
         );
   }
@@ -88,7 +88,7 @@ class _SignupState extends State<Signup> {
                       labelText: 'Password',
                     ),
                     SizedBox(height: 14),
-                    Row(children: [
+                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                       Text(
                         'Are you an organizer?:',
                         style: TextStyle(
